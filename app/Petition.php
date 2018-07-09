@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Petition extends Model
 {
+
     protected $fillable = [
         'plip_status',
         'template',

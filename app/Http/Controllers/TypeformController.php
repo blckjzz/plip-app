@@ -28,8 +28,12 @@ class TypeformController extends Controller
             #$this->until =  Carbon::createFromFormat('Y/m/d H:m:s', $until)->timestamp;
             $client = new Client();
             $uri = $this->baseUri.'&since='.$this->since;
-            #echo $uri;
             $result = $client->request('GET', $uri);
+
+            if($result->getStatusCode() != 200){
+                abort(404,'Indisponível');
+                return false;
+            }
             return json_decode($result->getBody(), true);
         }
         catch (\Exception $e) {
