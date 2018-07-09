@@ -20,7 +20,7 @@ class PetitionController extends Controller
     public function index()
     {
         $petitions = Petition::simplePaginate(15);
-        return $petitions;
+        return view('petition.petition', ['petitions' => $petitions]);
     }
     public function syncPlips()
     {
