@@ -136,11 +136,18 @@ class PetitionController extends Controller
             if (isset($value['answers']['textfield_DcjgsmwtRf0w'])) {
                 $plip->sender_telephone = $value['answers']['textfield_DcjgsmwtRf0w'];
             }
+
+            $plip->status_id = 0;
+
             $plip->save();
         }
         $log = new Log;
         $log->quantity;
     }
 
+    public function showPetition($id)
+    {
+        return view('petition.show', ['petition' => Petition::findOrFail($id)]);
+    }
 
 }

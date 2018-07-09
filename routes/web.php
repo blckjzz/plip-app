@@ -15,8 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('petition', 'PetitionController');
-Route::resource('typeform', 'TypeformController');
+Route::get('/petition', 'PetitionController@index');
 Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
+Route::get('/petition/sync', 'PetitionController@syncPlips');
+Route::get('petition/details/{id}', 'PetitionController@showPetition');
 
 

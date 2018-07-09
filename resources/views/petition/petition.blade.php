@@ -5,7 +5,7 @@
 
 @section('content')
     @foreach ($petitions as $petition)
-        <li>{{ $petition->name }} </li>
+        <li><a href="{{ action('PetitionController@showPetition', $petition->id) }}">{{ $petition->name }} </a></li>
     @endforeach
 
     {{ $petitions->links() }}
