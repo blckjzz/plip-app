@@ -15,21 +15,21 @@ class PlipTable extends Migration
     {
         Schema::create('petitions', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('plip_status');
-            $table->text('template');
-            $table->text('fantasy_name');
-            $table->text('name');
-            $table->text('text');
-            $table->text('wide');
-            $table->text('state');
-            $table->text('municipality');
-            $table->text('video_url');
-            $table->text('references');
-            $table->text('links');
-            $table->text('sender_name');
-            $table->text('sender_mail');
-            $table->text('sender_telephone');
-            $table->text('submitDate');
+            $table->text('plip_status')->nullable();
+            $table->text('template')->nullable();
+            $table->text('fantasy_name')->nullable();
+            $table->text('name')->nullable();
+            $table->text('text')->nullable();
+            $table->text('wide')->nullable();
+            $table->text('state')->nullable();
+            $table->text('municipality')->nullable();
+            $table->text('video_url')->nullable();
+            $table->text('references')->nullable();
+            $table->text('links')->nullable();
+            $table->text('sender_name')->nullable();
+            $table->text('sender_mail')->nullable();
+            $table->text('sender_telephone')->nullable();
+            $table->text('submitDate')->nullable();
         });
     }
 
@@ -40,6 +40,6 @@ class PlipTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('petitions');
     }
 }

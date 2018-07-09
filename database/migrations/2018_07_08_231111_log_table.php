@@ -28,6 +28,7 @@ class LogTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('log');
+
     }
 }

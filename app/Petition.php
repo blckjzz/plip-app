@@ -20,9 +20,14 @@ class Petition extends Model
         'state',
         'municipality',
         'video_url',
-        'references', 'links',
+        'references',
+        'links',
         'sender_name',
+        'sender_mail',
         'sender_telephone',
         'submitDate'
     ];
+
+    public $timestamps = false;
+
 }

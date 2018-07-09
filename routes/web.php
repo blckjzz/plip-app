@@ -17,5 +17,6 @@ Route::get('/', function () {
 
 Route::resource('petition', 'PetitionController');
 Route::resource('typeform', 'TypeformController');
+Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
 
 
