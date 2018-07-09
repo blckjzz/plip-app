@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\TypeformController;
 
 class PetitionController extends Controller
 {
+    private $typeformController;
+
+    public function __construct()
+    {
+        $this->typeformController = new TypeformController();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,7 @@ class PetitionController extends Controller
      */
     public function index()
     {
-        //
+        $this->typeformController->index();
     }
 
     /**

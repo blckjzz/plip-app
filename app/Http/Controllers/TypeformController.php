@@ -7,16 +7,22 @@ use GuzzleHttp\Client;
 
 class TypeformController extends Controller
 {
+    private $formId;
+    private $key;
+    private $baseUri;
+
+    public function __construct()
+    {
+        $this->formId= env("TYPEFORM_FORM_ID");
+        $this->key = env("TYPEFORM_KEY");
+        $this->baseUri = "https://api.typeform.com/v1/form/$this->formId?key=$this->key";
+
+    }
 
     public function index()
     {
         $client = new Client();
-        $formId = 'iulNZI';
-        #$baseUrix = 'https://api.typeform.com/forms/'.$formId .'/responses';
-        $key = env('');
-
-        $baseUri = "https://api.typeform.com/v1/form/$formId?key=$key";
-        $result = $client->request('get', $baseUri);
+        $result = $client->request('get', $this->baseUri);
         return $result;
     }
 
