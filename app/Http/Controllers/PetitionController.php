@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Log;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Petition;
@@ -28,8 +29,6 @@ class PetitionController extends Controller
         try {
             $response = $this->typeformController->getTypeformAnswers('2018/03/01');
             $this->transformJsonToObjects($response);
-            #return response()->json($this->petitionCollection);
-            #var_dump($this->petitionCollection);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -139,6 +138,8 @@ class PetitionController extends Controller
             }
             $plip->save();
         }
+        $log = new Log;
+        $log->quantity;
     }
 
 

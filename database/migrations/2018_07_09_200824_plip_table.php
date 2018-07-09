@@ -15,7 +15,7 @@ class PlipTable extends Migration
     {
         Schema::create('petitions', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('plip_status')->nullable();
+            $table->unsignedInteger('status_id');
             $table->text('template')->nullable();
             $table->text('fantasy_name')->nullable();
             $table->text('name')->nullable();
@@ -30,7 +30,9 @@ class PlipTable extends Migration
             $table->text('sender_mail')->nullable();
             $table->text('sender_telephone')->nullable();
             $table->text('submitDate')->nullable();
+            $table->foreign('status_id')->references('id')->on('plip_status');
         });
+
     }
 
     /**
