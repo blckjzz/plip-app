@@ -13,7 +13,7 @@ class LogTable extends Migration
      */
     public function up()
     {
-        Schema::create('log', function (Blueprint $table){
+        Schema::create('logs', function (Blueprint $table){
            $table->increments('id');
            $table->bigInteger('quantity');
            $table->dateTime('sync_date');
