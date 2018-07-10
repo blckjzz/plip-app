@@ -26,10 +26,7 @@ class PetitionController extends Controller
 
     public function syncPlips()
     {
-        $todayDate = Carbon::now()->toDateTimeString();
-        //GET DATE FROM DATABASE AND PARSE TO METHOD
         $latestSyncDate = DB::table('logs')->select('sync_date')->latest('sync_date')->get();
-        #$latestSyncDate = Log::where('motive' , '=','PLIP_SYNC')->latest('sync_date')->get();
         try {
 
             $response = $this->typeformController->getTypeformAnswers($latestSyncDate[0]->sync_date);
