@@ -12,6 +12,7 @@
             <th scope="col">Email</th>
             <th scope="col">Enviado em</th>
             <th scope="col">Status</th>
+            <th scope="col">Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -24,6 +25,10 @@
                 <td>{{ str_limit($petition->sender_mail, 30) }} </td>
                 <td>{{ $petition->submitDate->diffForHumans()}} </td>
                 <td>{{ $petition->status->status }}</td>
+                <td>
+                    <a href="{{ action('PetitionController@showPetition', $petition->id) }}"><span class="fa fa-eye"></span></a>
+                    <a href="{{ action('PetitionController@edit', $petition->id) }}"><span class="fa fa-pencil"></span></a>
+                </td>
             </tr>
         @endforeach
         </tbody>
