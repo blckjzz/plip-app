@@ -3,7 +3,7 @@
 @section('title', 'Petitions')
 
 @section('content')
-    <table class="table">
+    <table class="" id="petitions">
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -18,7 +18,8 @@
         @foreach ($petitions as $petition)
             <tr>
                 <th>{{ $petition->id }}</th>
-                <td><a href="{{ action('PetitionController@showPetition', $petition->id) }}">{{ str_limit($petition->name, 30) }} </a>
+                <td>
+                    <a href="{{ action('PetitionController@showPetition', $petition->id) }}">{{ str_limit($petition->name, 30) }} </a>
                 <td>{{ str_limit($petition->sender_name, 30) }} </td>
                 <td>{{ str_limit($petition->sender_mail, 30) }} </td>
                 <td>{{ $petition->submitDate->diffForHumans()}} </td>
@@ -28,7 +29,12 @@
         </tbody>
     </table>
 
-    {{ $petitions->links() }}
-
 @endsection
 
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#petitions').DataTable();
+        });
+    </script>
+@endsection

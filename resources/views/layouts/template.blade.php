@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ asset("js/plugins/daterangepicker/daterangepicker-bs3.css")}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset("js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+    <!-- Data Table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -609,6 +611,8 @@
 </div>
 <!-- ./wrapper -->
 
+</body>
+
 <!-- jQuery -->
 <script src="js/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -642,9 +646,7 @@
 <script src="js/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
-</body>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+@yield('scripts')
 </html>
