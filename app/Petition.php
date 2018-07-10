@@ -30,5 +30,6 @@ class Petition extends Model
     ];
 
     public $timestamps = false;
+    protected $dates = ['submitDate'];
 
 }

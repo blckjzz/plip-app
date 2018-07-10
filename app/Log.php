@@ -11,4 +11,8 @@ class Log extends Model
         'sync_date',
         'motive'
     ];
+
+    public $timestamps = false;
+
+    protected $dates = ['sync_date'];
 }

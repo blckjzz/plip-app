@@ -21,13 +21,19 @@ class TypeformController extends Controller
         $this->baseUri = "https://api.typeform.com/v1/form/$this->formId?key=$this->key";
     }
 
-    public function getTypeformAnswers($since)
+    public function getTypeformAnswers($since, $until = '')
     {
         try {
-            $this->since =  Carbon::createFromFormat('Y/m/d', $since)->timestamp;
-            #$this->until =  Carbon::createFromFormat('Y/m/d H:m:s', $until)->timestamp;
+
+            $this->since = Carbon::createFromFormat('Y-m-d H:i:s' , $since, 'America/Sao_Paulo')->timestamp;
+
+            if(isset($until) || $until == ''){
+                $until = Carbon::now('America/Sao_Paulo');
+            }
+
+            $this->until = Carbon::createFromFormat('Y-m-d H:i:s' , $until)->timestamp;
             $client = new Client();
-            $uri = $this->baseUri.'&since='.$this->since;
+            $uri = $this->baseUri.'&since='.$this->since.'&until='.$this->until;
             $result = $client->request('GET', $uri);
 
             if($result->getStatusCode() != 200){
