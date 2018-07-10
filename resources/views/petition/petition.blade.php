@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title', 'Petitions')
-    
+
 @section('content')
     <table class="table">
         <thead>
@@ -19,10 +19,10 @@
             <tr>
                 <th>{{ $petition->id }}</th>
                 <td><a href="{{ action('PetitionController@showPetition', $petition->id) }}">{{ str_limit($petition->name, 30) }} </a>
-                <td>{{ $petition->sender_name }} </td>
-                <td>{{ $petition->sender_mail }} </td>
-                <td>{{ $petition->submitDate }} </td>
-                <td>{{ $petition->status_id }}</td>
+                <td>{{ str_limit($petition->sender_name, 30) }} </td>
+                <td>{{ str_limit($petition->sender_mail, 30) }} </td>
+                <td>{{ $petition->submitDate->diffForHumans()}} </td>
+                <td>{{ $petition->status->status }}</td>
             </tr>
         @endforeach
         </tbody>
