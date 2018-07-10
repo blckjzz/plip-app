@@ -585,7 +585,7 @@
                         @yield('content')
                     </div>
                 </div>
-                
+
 
                 <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
