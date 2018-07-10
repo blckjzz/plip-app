@@ -176,6 +176,13 @@ class PetitionController extends Controller
 
     public function edit($id)
     {
-        return $id;
+        return view('petition.edit', ['petition' => Petition::findOrFail($id)]);
+    }
+
+    public function save(Request $request)
+    {
+        var_dump($request->all());
+        dd($request->all());
+
     }
 }
