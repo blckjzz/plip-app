@@ -173,4 +173,9 @@ class PetitionController extends Controller
         return view('petition.show', ['petition' => Petition::findOrFail($id)]);
     }
 
+
+    public function edit($id)
+    {
+        return $id;
+    }
 }

@@ -18,5 +18,5 @@ Route::get('/', function () {
 Route::get('/petition', 'PetitionController@index');
 Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
 Route::get('petition/details/{id}', 'PetitionController@showPetition');
-
+Route::get('petition/edit/{id}', 'PetitionController@edit');
 
