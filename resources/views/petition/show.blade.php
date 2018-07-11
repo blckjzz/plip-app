@@ -1,6 +1,7 @@
 @extends('layouts.template')
 
 @section('title', $petition->name )
+@section('pageTitle', 'Detalhes - '. $petition->name)
 @section('content')
 
     <form>

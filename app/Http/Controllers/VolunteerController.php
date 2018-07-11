@@ -14,8 +14,8 @@ class VolunteerController extends Controller
      */
     public function index()
     {
-        $volunters = Volunteer::all();
-        return view('volunteer.index')->with(['voluntarios' => $volunters]);
+        $voluntarios = Volunteer::all();
+        return view('volunteer.index', ['voluntarios' => $voluntarios]);
     }
 
     /**
@@ -25,24 +25,28 @@ class VolunteerController extends Controller
      */
     public function create()
     {
-        //
+        return view('volunteer.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        $voluntario = new Volunteer($request->all());
+        $voluntario->save();
+
+        return redirect()->action('VolunteerController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Volunteer  $volunteer
+     * @param  \App\Volunteer $volunteer
      * @return \Illuminate\Http\Response
      */
     public function show(Volunteer $volunteer)
@@ -53,7 +57,7 @@ class VolunteerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Volunteer  $volunteer
+     * @param  \App\Volunteer $volunteer
      * @return \Illuminate\Http\Response
      */
     public function edit(Volunteer $volunteer)
@@ -64,8 +68,8 @@ class VolunteerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Volunteer  $volunteer
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Volunteer $volunteer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Volunteer $volunteer)
@@ -76,7 +80,7 @@ class VolunteerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Volunteer  $volunteer
+     * @param  \App\Volunteer $volunteer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Volunteer $volunteer)

@@ -1,6 +1,7 @@
 @extends('layouts.template')
 
 @section('title', 'Edição - '. $petition->name )
+@section('pageTitle', 'Edição - '. $petition->name)
 @section('content')
 
 

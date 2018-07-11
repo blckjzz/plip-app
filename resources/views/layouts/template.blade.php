@@ -193,27 +193,42 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
+                    <li class="nav-item has-treeview">
                         <a href="{{ action('PetitionController@index') }}" class="nav-link">
                             <i class="fa fa-file nav-icon"></i>
                             <p> Petições
                                 <i class="right fa fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="" class="nav-link ">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>Petition Menu</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-
                 </ul>
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
+                    <li class="nav-item has-treeview">
                         <a href="{{ action('VolunteerController@index') }}" class="nav-link">
                             <i class="fa fa-user-circle nav-icon"></i>
                             <p> Voluntários
                                 <i class="right fa fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ action('VolunteerController@create') }}" class="nav-link ">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>Cadastrar Voluntário</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                 </ul>
@@ -246,7 +261,6 @@
         <section class="content">
                 <!-- Main row -->
             @yield('cards')
-
                 <div class="row">
                     <div class="col-lg-10">
                         @if (session('message'))
@@ -255,7 +269,6 @@
                             </div>
                         @endif
                         @yield('content')
-
                     </div>
                 </div>
 
