@@ -31,6 +31,7 @@ class PlipTable extends Migration
             $table->text('sender_telephone')->nullable();
             $table->text('submitDate')->nullable();
             $table->foreign('status_id')->references('id')->on('plip_status');
+            $table->timestamps();
         });
 
     }
