@@ -27,7 +27,7 @@ class PetitionController extends Controller
 
     public function syncPlips()
     {
-        $latestSyncDate = DB::table('logs')->select('sync_date')->latest('sync_date')->get();
+        $latestSyncDate = DB::table('logs')->where('motive', '=', 'PLIP_SYNC')->select('sync_date')->latest('sync_date')->get();
         try {
 
             $response = $this->typeformController->getTypeformAnswers($latestSyncDate[0]->sync_date);
