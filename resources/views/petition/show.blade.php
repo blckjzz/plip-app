@@ -3,7 +3,7 @@
 @section('title', $petition->name )
 @section('content')
 
-    <form class="" method="get" action="{{ action('PetitionController@edit', $petition->id)}}">
+    <form>
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group">
@@ -14,10 +14,9 @@
                 </div>
                 <div class="btn-group">
 
-
-                    <button type="submit" value="Editar" class="btn btn-success">Editar</button>
-
-
+                    <a href="{{ action('PetitionController@edit', $petition->id)}}">
+                        <button type="button" value="Editar" class="btn btn-success">Editar</button>
+                    </a>
                 </div>
             </div>
         </div>

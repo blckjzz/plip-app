@@ -2,7 +2,7 @@
 
 @section('title', 'Edição - '. $petition->name )
 @section('content')
-    <form class="" method="POST" action="{{ action('PetitionController@save', $petition->id)}}">
+    <form class="" method="POST" action="{{ action('PetitionController@save')}}">
         {{ csrf_field() }}
         <input name="id" type="hidden" class="form-control" value="{{$petition->id}}"/>
         <div class="row">
@@ -80,7 +80,7 @@
             </div>
             <div class="form-group">
                 <label for="proponente">Status do Projeto </label>
-                <select class="form-control" name="plip_status">
+                <select class="form-control" name="status_id">
 
                     @foreach($status as $s)
                         @if($s->id == $petition->status->id)
