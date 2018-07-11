@@ -24,3 +24,4 @@ Route::get('/petition/sync', 'PetitionController@syncPlips');
 Route::get('/trello/info', 'TrelloController@getTrelloBoardInfos');
 Route::get('/trello/create', 'TrelloController@createTrelloCard');
 Route::get('/trello/push', 'TrelloController@pushPlipToTrello');
+Route::resource('/volunteer', 'VolunteerController');
