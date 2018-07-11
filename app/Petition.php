@@ -29,7 +29,6 @@ class Petition extends Model
         'submitDate'
     ];
 
-    public $timestamps = false;
     protected $dates = ['submitDate'];
 
     public function status()
