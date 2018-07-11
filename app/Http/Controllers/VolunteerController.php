@@ -14,7 +14,8 @@ class VolunteerController extends Controller
      */
     public function index()
     {
-        //
+        $volunters = Volunteer::all();
+        return view('volunteer.index')->with(['voluntarios' => $volunters]);
     }
 
     /**

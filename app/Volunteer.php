@@ -10,4 +10,5 @@ class Volunteer extends Model
         'name', 'personal_email', 'volunteer_mail', 'telephone', 'volunteer_since', 'notes'
     ];
 
+    protected $dates = ['volunteer_since'];
 }
