@@ -28,6 +28,14 @@
                     <input name="project_name" type="text" class="form-control" disabled value="{{$petition->name}}">
                 </div>
 
+
+                <div class="form-group">
+                    <label for="">Nome fantasia do projeto</label>
+                    <input name="fantasy_name" type="text" class="form-control" disabled
+                           value="{{$petition->fantasy_name}}">
+                </div>
+
+
                 <div class="form-group">
                     <label for="proponente">Proponente </label>
                     <input name="sender_name" type="text" class="form-control" disabled

@@ -6,6 +6,7 @@ use App\Log;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Petition;
+use App\Status;
 use Illuminate\Support\Facades\DB;
 
 
@@ -149,7 +150,7 @@ class PetitionController extends Controller
                         $plip->status_id = 0;
                         $plip->saveOrFail();
                         $log->quantity++;
-                        echo 'Saving ['.$plip->name.'] project to database.\n';
+                        echo 'Saving [' . $plip->name . '] project to database.\n';
 
                     }
                 }
@@ -167,9 +168,9 @@ class PetitionController extends Controller
             $log->sync_date = Carbon::now('America/Sao_Paulo');
             $log->saveOrFail();
             # Debug on console
-            echo 'Total of: [' . $log->quantity .'] project were synced';
+            echo 'Total of: [' . $log->quantity . '] project were synced';
         }
-        return response(['message' => 'There is no plip to be synced', 'log' => $log ], 200)
+        return response(['message' => 'There is no plip to be synced', 'log' => $log], 200)
             ->header('Content-Type', 'application/json');
 
 
@@ -178,19 +179,32 @@ class PetitionController extends Controller
     public
     function showPetition($id)
     {
-        return view('petition.show', ['petition' => Petition::findOrFail($id)]);
+
+        return view('petition.show',
+            [
+                'petition' => Petition::findOrFail($id),
+
+            ]
+        );
     }
 
 
     public function edit($id)
     {
-        return view('petition.edit', ['petition' => Petition::findOrFail($id)]);
+        $status = Status::all();
+        return view('petition.edit', ['petition' => Petition::findOrFail($id), 'status' => $status]);
     }
 
     public function save(Request $request)
     {
-        var_dump($request->all());
-        dd($request->all());
+        //find plip in database
+        // compare values
+        // save new values to database keep the old values
+        $petition = Petition::find($request->only('id'));
+        #$petitionRequest = new Petition($request->all());
+
+        dd($petition);
+
 
     }
 }
