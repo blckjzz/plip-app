@@ -47,6 +47,7 @@ class PetitionController extends Controller
 
             if (isset($petitionJsonList['responses'])) {
                 if (count($petitionJsonList['responses']) > 0) {
+                    echo 'Processing PLIP SYNC..';
                     foreach ($petitionJsonList['responses'] as $key => $value) {
                         $plip = new Petition;
                         /**
@@ -148,22 +149,29 @@ class PetitionController extends Controller
                         $plip->status_id = 0;
                         $plip->saveOrFail();
                         $log->quantity++;
+                        echo 'Saving ['.$plip->name.'] project to database.\n';
+
                     }
                 }
             } else {
-                return response('There is no plip to be synced', 204)
-                    ->header('Content-Type', 'text/plain');
+                return response(['message' => 'There is no plip to be synced'], 204)
+                    ->header('Content-Type', 'application/json');
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
+            echo $e->getMessage();
+            return response(['message' => 'Something went wrong, check the message', 'exceptions' => $e->getMessage()], 500)
+                ->header('Content-Type', 'application/json');
         } finally {
             // Log the event everytime that plips are synced
             $log->motive = 'PLIP_SYNC';
             $log->sync_date = Carbon::now('America/Sao_Paulo');
             $log->saveOrFail();
+            # Debug on console
+            echo 'Total of: [' . $log->quantity .'] project were synced';
         }
+        return response(['message' => 'There is no plip to be synced', 'log' => $log ], 200)
+            ->header('Content-Type', 'application/json');
 
-        return $log;
 
     }
 
