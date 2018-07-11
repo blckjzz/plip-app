@@ -9,13 +9,12 @@ class Petition extends Model
 {
 
     protected $fillable = [
-        'plip_status',
         'template',
         'fantasy_name',
         'name',
         'text',
         'wide',
-        'plip_status',
+        'status_id',
         'template',
         'fantasy_name',
         'name',
