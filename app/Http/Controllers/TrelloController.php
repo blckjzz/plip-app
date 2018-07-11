@@ -3,82 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use App\Petition;
 
 class TrelloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $trelloBoard;
+    protected $trelloListId;
+    protected $card;
+    protected $trelloClient;
+    protected $cardOClient;
+
+    public function __construct()
     {
-        //
+        $this->trelloClient = new \Trello\Client(env('TRELLO_KEY'));
+        $this->trelloClient->setAccessToken(env('TRELLO_TOKEN'));
+        $this->board = new \Trello\Model\Board($this->trelloClient);
+        $this->board->setId(env('TRELLO_BOARD_ID'));
+        $this->trelloListId = env('TRELLO_LIST_ID');
+        $this->card = new \Trello\Model\Card($this->trelloClient);
+        $this->card->idList = $this->trelloListId;
+
+    }
+
+    public function getTrelloBoardInfos()
+    {
+        try {
+            $http = new Client();
+            $uri = env('TRELLO_BOARD_URL') . '' . env('TRELLO_BOARD_ID') . '?key=' . env('TRELLO_KEY') . '&token=' . env('TRELLO_TOKEN');
+            $response = $http->request('GET', $uri);
+            return json_decode($response->getBody(), true);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Create a card on trello board
+     * @return string
      */
-    public function create()
+    public function createTrelloCard($petition)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        try {
+            // Card Creation
+            $this->card->name = $petition->name;
+            $this->card->desc = $petition->text;
+            $this->card->pos = 'TOP';
+            $this->card->due = $petition->submitDate;
+            // para implementar assim que adicionar modulo de asign para voluntarios
+            // $this->card->idMembers =
+            $this->card->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

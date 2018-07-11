@@ -20,4 +20,6 @@ Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
 Route::get('petition/details/{id}', 'PetitionController@showPetition');
 Route::get('petition/edit/{id}', 'PetitionController@edit');
 Route::POST('/petition/save', 'PetitionController@save');
-Route::get('petition/sync', 'PetitionController@syncPlips');
+Route::get('/petition/sync', 'PetitionController@syncPlips');
+Route::get('/trello/info', 'TrelloController@getTrelloBoardInfos');
+Route::get('/trello/create', 'TrelloController@createTrelloCard');
