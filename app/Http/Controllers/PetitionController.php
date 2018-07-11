@@ -198,13 +198,10 @@ class PetitionController extends Controller
     public function save(Request $request)
     {
         $petitionID = $request->only('id');
-        //find plip in database
-        // compare values
-        // save new values to database keep the old values
 
-        dd(Petition::where('id', $petitionID)->update($request->except(['_token', 'id'])));
+        Petition::where('id', $petitionID)->update($request->except(['_token', 'id']));
 
-
+        return redirect()->back()->with(['message' => "Alteração feita com sucesso!"]);
 
     }
 }
