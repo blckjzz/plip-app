@@ -179,12 +179,10 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
+                    <li class="nav-item">
                         <a href="{{ url('/') }}" class="nav-link">
-                            <i class="fa fa-dashboard nav-icon"></i>
-                            <p> Dashboard
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
+                            <i class="nav-icon fa fa-dashboard"></i>
+                            <p>Dashboard</p>
                         </a>
                     </li>
 
@@ -193,8 +191,8 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview">
-                        <a href="{{ action('PetitionController@index') }}" class="nav-link">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="fa fa-file nav-icon"></i>
                             <p> Petições
                                 <i class="right fa fa-angle-left"></i>
@@ -202,9 +200,16 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ action('PetitionController@index') }}" class="nav-link ">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Lista de Projetos</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="" class="nav-link ">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Petition Menu</p>
+                                    <i class="fa fa-plus-circle nav-icon"></i>
+                                    <p>Cadastrar análise</p>
                                 </a>
                             </li>
                         </ul>
@@ -215,7 +220,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview">
-                        <a href="{{ action('VolunteerController@index') }}" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="fa fa-user-circle nav-icon"></i>
                             <p> Voluntários
                                 <i class="right fa fa-angle-left"></i>
@@ -223,8 +228,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+
+                                <a href="{{ action('VolunteerController@index') }}" class="nav-link ">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Lista de Voluntários</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ action('VolunteerController@create') }}" class="nav-link ">
-                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <i class="fa fa-plus-circle nav-icon"></i>
                                     <p>Cadastrar Voluntário</p>
                                 </a>
                             </li>
@@ -294,39 +306,39 @@
 </body>
 
 <!-- jQuery -->
-<script src="js/plugins/jquery/jquery.min.js"></script>
+<script src="{{ asset('js/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{asset('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('js/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="js/plugins/morris/morris.min.js"></script>
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js')}}"></script>
+<script src="{{asset('js/plugins/morris/morris.min.js')}}"></script>
 <!-- Sparkline -->
-<script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="{{asset('js/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 <!-- jvectormap -->
-<script src="../../../../Downloads/AdminLTE-3.0.0-alpha.2/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="{{asset('js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+<script src="{{asset('js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 <!-- jQuery Knob Chart -->
-<script src="js/plugins/knob/jquery.knob.js"></script>
+<script src="{{asset('js/plugins/knob/jquery.knob.js')}}"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="js/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js')}}"></script>
+<script src="{{asset('js/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- datepicker -->
-<script src="js/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="{{asset('js/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="{{asset('js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->
-<script src="js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('js/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
-<script src="js/plugins/fastclick/fastclick.js"></script>
+<script src="{{asset('js/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="js/adminlte.js"></script>
+<script src="{{asset('js/adminlte.js')}}"></script>
 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="{{asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js')}}"></script>
 @yield('scripts')
 </html>

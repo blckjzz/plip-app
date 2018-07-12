@@ -204,4 +204,16 @@ class PetitionController extends Controller
         return redirect()->back()->with(['message' => "Alteração feita com sucesso!"]);
 
     }
+
+    public function showNewPetitions()
+    {
+        $petitions = Petition::all()->where('created_at', '>=', Carbon::today());
+        return view('petition.petition', ['petitions' => $petitions]);
+    }
+
+    public function showPetitionsInAnalysis()
+    {
+        $petitions = Petition::all()->where('status_id', '=', '1');
+        return view('petition.petition', ['petitions' => $petitions]);
+    }
 }
