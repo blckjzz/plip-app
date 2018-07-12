@@ -5,9 +5,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{ $reports['petitionCount'] }}</h3>
 
-                    <p>Novos Projetos</p>
+                    <p>Projetos</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-file"></i>
@@ -22,7 +22,7 @@
                 <div class="inner">
                     <h3>44</h3>
 
-                    <p>Projetos analisados</p>
+                    <p>Projetos em análise</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -37,7 +37,7 @@
                 <div class="inner">
                     <h3>65</h3>
 
-                    <p>Projetos reprovados</p>
+                    <p>Projetos recebidos hoje</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
