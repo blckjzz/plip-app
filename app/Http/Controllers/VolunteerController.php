@@ -39,7 +39,6 @@ class VolunteerController extends Controller
 
         $voluntario = new Volunteer($request->all());
         $voluntario->save();
-
         return redirect()->action('VolunteerController@index');
     }
 

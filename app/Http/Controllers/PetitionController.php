@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Log;
+use App\Volunteer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Petition;
@@ -147,7 +148,8 @@ class PetitionController extends Controller
                             $plip->submitDate = $value['metadata']['date_submit'];
                         }
 
-                        $plip->status_id = 0;
+                        //status_id = 1 means novo
+                        $plip->status_id = 1;
                         $plip->saveOrFail();
                         $log->quantity++;
                         echo 'Saving [' . $plip->name . '] project to database.\n';
@@ -213,7 +215,36 @@ class PetitionController extends Controller
 
     public function showPetitionsInAnalysis()
     {
-        $petitions = Petition::all()->where('status_id', '=', '1');
+        $petitions = Petition::all()->where('status_id', '=', '2');
         return view('petition.petition', ['petitions' => $petitions]);
+    }
+
+    public function assign()
+    {
+        // list petitions
+        // add status equals novo # 1
+        $petitions = Petition::all()->where('status_id', '=', '1')->where('volunteer_id', '=', '');
+
+        // list volunteers
+        $volunteers = Volunteer::all();
+        // list status
+        $status = Status::all();
+        // create another function where save the data and stores into the database
+        return view('petition.assign', ['petitions' => $petitions, 'volunteers' => $volunteers, 'status' => $status]);
+
+    }
+
+    public function saveAssign(Request $request)
+    {
+
+        $petition = Petition::find($request->input('project_id'));
+        $petition->status_id = $request->input('status');
+        $petition->volunteer_id = $request->input('volunteer_id');
+
+        $petition->save();
+
+        return redirect()->action('PetitionController@showPetitionsInAnalysis');
+
+
     }
 }
