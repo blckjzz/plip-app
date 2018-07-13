@@ -11,6 +11,7 @@
             <th scope="col">Proponente</th>
             <th scope="col">Email</th>
             <th scope="col">Enviado em</th>
+            <th scope="col">Voluntário</th>
             <th scope="col">Status</th>
             <th scope="col">Ações</th>
         </tr>
@@ -24,9 +25,19 @@
                 <td>{{ str_limit($petition->sender_name, 30) }} </td>
                 <td>{{ str_limit($petition->sender_mail, 30) }} </td>
                 <td>{{ $petition->submitDate->diffForHumans()}} </td>
+
+                <td>
+                    @if(isset($petition->volunteer->id))
+                    <a href="{{ action('VolunteerController@show', $petition->volunteer->id) }}">
+                        {{ $petition->volunteer->name }}
+                    </a>
+                    @endif
+                </td>
+
                 <td>{{ $petition->status->status }}</td>
                 <td>
-                    <a href="{{ action('PetitionController@showPetition', $petition->id) }}"><span class="fa fa-eye"></span></a>
+                    <a href="{{ action('PetitionController@showPetition', $petition->id) }}"><span
+                                class="fa fa-eye"></span></a>
                     <a href="{{ action('PetitionController@edit', $petition->id) }}"><span class="fa fa-pencil"></span></a>
                 </td>
             </tr>

@@ -11,4 +11,9 @@ class Volunteer extends Model
     ];
 
     protected $dates = ['volunteer_since'];
+
+    public function petition()
+    {
+        return $this->hasMany('App\Petition');
+    }
 }

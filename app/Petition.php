@@ -36,4 +36,9 @@ class Petition extends Model
         return $this->belongsTo('App\Status');
     }
 
+    public function volunteer()
+    {
+        return $this->belongsTo('App\Volunteer');
+    }
+
 }
