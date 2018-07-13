@@ -207,7 +207,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="" class="nav-link ">
+                                <a href="{{action('PetitionController@assign')}}" class="nav-link ">
                                     <i class="fa fa-plus-circle nav-icon"></i>
                                     <p>Cadastrar análise</p>
                                 </a>
@@ -283,10 +283,6 @@
                         @yield('content')
                     </div>
                 </div>
-
-
-                <!-- /.row (main row) -->
-            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

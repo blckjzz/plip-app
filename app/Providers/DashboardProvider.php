@@ -19,7 +19,7 @@ class DashboardProvider extends ServiceProvider
         view()->share(['reports' =>
             [
                 'petitionCount' => Petition::all()->count(),
-                'petitionInAnalisys' => Petition::all()->where('status_id', '=','1')->count(),
+                'petitionInAnalisys' => Petition::all()->where('status_id', '=','2')->count(),
                 'new_projects' => Petition::all()->where('created_at', '>=', Carbon::today())->count()
             ]
         ]);
