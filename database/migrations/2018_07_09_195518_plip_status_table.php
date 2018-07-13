@@ -26,6 +26,6 @@ class PlipStatusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plip_status');
+        Schema::dropIfExists('plip_status');
     }
 }

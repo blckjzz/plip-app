@@ -16,6 +16,7 @@ class PlipTable extends Migration
         Schema::create('petitions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('status_id')->default(0);
+            $table->unsignedInteger('volunteer_id')->nullable();
             $table->text('template')->nullable();
             $table->text('fantasy_name')->nullable();
             $table->text('name')->nullable();
@@ -30,10 +31,10 @@ class PlipTable extends Migration
             $table->text('sender_mail')->nullable();
             $table->text('sender_telephone')->nullable();
             $table->text('submitDate')->nullable();
-            $table->foreign('status_id')->references('id')->on('plip_status');
+            $table->foreign('status_id')->references('id')->on('plip_status')->onDelete('cascade');;
+            #$table->foreign('volunteer_id')->references('id')->on('volunteers')->onDelete('cascade');;
             $table->timestamps();
         });
-
     }
 
     /**
@@ -43,6 +44,6 @@ class PlipTable extends Migration
      */
     public function down()
     {
-        Schema::drop('petitions');
+        Schema::dropIfExists('petitions');
     }
 }
