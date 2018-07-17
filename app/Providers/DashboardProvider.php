@@ -23,6 +23,8 @@ class DashboardProvider extends ServiceProvider
                 'new_projects' => Petition::all()->where('created_at', '>=', Carbon::today())->count()
             ]
         ]);
+
+        \Carbon\Carbon::setLocale('pt_BR');
     }
 
     /**
