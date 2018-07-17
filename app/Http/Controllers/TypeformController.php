@@ -16,7 +16,8 @@ class TypeformController extends Controller
 
     public function __construct()
     {
-        $this->formId= env("TYPEFORM_FORM_ID");
+        $this->middleware('auth');
+        $this->formId = env("TYPEFORM_FORM_ID");
         $this->key = env("TYPEFORM_KEY");
         $this->baseUri = "https://api.typeform.com/v1/form/$this->formId?key=$this->key";
     }
@@ -25,24 +26,23 @@ class TypeformController extends Controller
     {
         try {
 
-            $this->since = Carbon::createFromFormat('Y-m-d H:i:s' , $since, 'America/Sao_Paulo')->timestamp;
+            $this->since = Carbon::createFromFormat('Y-m-d H:i:s', $since, 'America/Sao_Paulo')->timestamp;
 
-            if(isset($until) || $until == ''){
+            if (isset($until) || $until == '') {
                 $until = Carbon::now('America/Sao_Paulo');
             }
 
-            $this->until = Carbon::createFromFormat('Y-m-d H:i:s' , $until)->timestamp;
+            $this->until = Carbon::createFromFormat('Y-m-d H:i:s', $until)->timestamp;
             $client = new Client();
-            $uri = $this->baseUri.'&since='.$this->since.'&until='.$this->until;
+            $uri = $this->baseUri . '&since=' . $this->since . '&until=' . $this->until;
             $result = $client->request('GET', $uri);
 
-            if($result->getStatusCode() != 200){
-                abort(404,'Indisponível');
+            if ($result->getStatusCode() != 200) {
+                abort(404, 'Indisponível');
                 return false;
             }
             return json_decode($result->getBody(), true);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }

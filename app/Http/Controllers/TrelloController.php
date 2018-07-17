@@ -19,6 +19,9 @@ class TrelloController extends Controller
 
     public function __construct()
     {
+
+        $this->middleware('auth');
+
         $this->trelloClient = new \Trello\Client(env('TRELLO_KEY'));
         $this->trelloClient->setAccessToken(env('TRELLO_TOKEN'));
         $this->board = new \Trello\Model\Board($this->trelloClient);
