@@ -31,8 +31,7 @@ class PlipTable extends Migration
             $table->text('sender_mail')->nullable();
             $table->text('sender_telephone')->nullable();
             $table->text('submitDate')->nullable();
-            $table->foreign('status_id')->references('id')->on('plip_status')->onDelete('cascade');;
-            #$table->foreign('volunteer_id')->references('id')->on('volunteers')->onDelete('cascade');;
+            $table->foreign('status_id')->references('id')->on('plip_status')->onDelete('cascade');
             $table->timestamps();
         });
     }

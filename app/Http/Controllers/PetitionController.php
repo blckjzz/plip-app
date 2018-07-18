@@ -60,6 +60,9 @@ class PetitionController extends Controller
                          **/
                         if (isset($value['answers']['textfield_AkbyrKsQvlVJ'])) {
                             $plip->name = $value['answers']['textfield_AkbyrKsQvlVJ'];
+                            if ($plip->name == '') {
+                                $plip->name = 'PETIÇÃO SEM NOME ';
+                            }
                         }
                         /**
                          *  "id" => "textarea_bFx24eWPri6j"
