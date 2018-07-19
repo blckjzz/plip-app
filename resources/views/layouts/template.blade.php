@@ -103,7 +103,7 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Nora Silvester
@@ -147,7 +147,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="" href="{{ Auth::logout() }}">
+                <a class="nav-link" data-toggle="" href="{{ url('logout')}}">
                     Sair
                 </a>
             </li>
@@ -169,7 +169,9 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info">
-                    <a href="#" class="d-block">{{ auth()->user()->name}}</a>
+                    @if(Auth::check())
+                        <a href="#" class="d-block">{{  auth()->user()->name }}</a>
+                    @endif
                 </div>
             </div>
 

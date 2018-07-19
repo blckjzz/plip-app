@@ -12,11 +12,9 @@
 */
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-
 Route::get('/', function () {
     return view('layouts.home');
 })->middleware('auth');
-
 Route::get('/petition', 'PetitionController@index');
 Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
 Route::get('petition/details/{id}', 'PetitionController@showPetition');
@@ -31,14 +29,3 @@ Route::get('/trello/info', 'TrelloController@getTrelloBoardInfos');
 Route::get('/trello/create', 'TrelloController@createTrelloCard');
 Route::get('/trello/push', 'TrelloController@pushPlipToTrello');
 Route::resource('/voluntarios', 'VolunteerController');
-
-
-
-
-
-
-
-
-
-
-Route::get('/home', 'HomeController@index')->name('home');
