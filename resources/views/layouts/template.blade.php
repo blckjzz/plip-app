@@ -147,11 +147,14 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-                            class="fa fa-th-large"></i></a>
+                <a class="nav-link" data-toggle="" href="{{ Auth::logout() }}">
+                    Sair
+                </a>
             </li>
         </ul>
     </nav>
+
+
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -268,18 +271,18 @@
 
         <!-- Main content -->
         <section class="content">
-                <!-- Main row -->
+            <!-- Main row -->
             @yield('cards')
-                <div class="row">
-                    <div class="col-lg-10">
-                        @if (session('message'))
-                            <div class="alert alert-success">
-                                {{ session('message') }}
-                            </div>
-                        @endif
-                        @yield('content')
-                    </div>
+            <div class="row">
+                <div class="col-lg-10">
+                    @if (session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                    @yield('content')
                 </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -291,6 +294,7 @@
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
+
     </aside>
     <!-- /.control-sidebar -->
 </div>
@@ -332,6 +336,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('js/adminlte.js')}}"></script>
 
-<script type="text/javascript" charset="utf8" src="{{asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js')}}"></script>
+<script type="text/javascript" charset="utf8"
+        src="{{asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js')}}"></script>
 @yield('scripts')
 </html>
