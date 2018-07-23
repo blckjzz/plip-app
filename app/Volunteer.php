@@ -18,9 +18,13 @@ class Volunteer extends Model
     }
 
 
-
     public function analysis()
     {
         return $this->belongsToMany('App\Petition', 'analyses', 'volunteer_id', 'petition_id');
+    }
+
+    public function is_user()
+    {
+        return $this->belongsTo('App\User');
     }
 }
