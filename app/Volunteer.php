@@ -16,4 +16,11 @@ class Volunteer extends Model
     {
         return $this->hasMany('App\Petition');
     }
+
+
+
+    public function analysis()
+    {
+        return $this->belongsToMany('App\Petition', 'analyses', 'volunteer_id', 'petition_id');
+    }
 }

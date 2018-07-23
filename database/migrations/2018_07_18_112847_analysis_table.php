@@ -16,12 +16,12 @@ class AnalysisTable extends Migration
         Schema::create('analysis', function (Blueprint $table){
             $table->increments('id');
             $table->integer('volunteer_id')->unsigned();
-            $table->text('analisys_text');
-            $table->text('referral_law');
-            $table->text('law_link');
-            $table->text('percent_votes');
-            $table->text('vote_number');
-            $table->text('minimum_signatures');
+            $table->text('analisys_text')->nullable();
+            $table->text('referral_law')->nullable();
+            $table->text('law_link')->nullable();
+            $table->text('percent_votes')->nullable();
+            $table->text('vote_number')->nullable();
+            $table->text('minimum_signatures')->nullable();
         });
 
         Schema::table('analysis', function($table) {

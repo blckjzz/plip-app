@@ -41,4 +41,9 @@ class Petition extends Model
         return $this->belongsTo('App\Volunteer');
     }
 
+    public function analyst()
+    {
+        return $this->belongsToMany('App\Volunteer', 'analyses', 'petition_id', 'volunteer_id');
+    }
+
 }
