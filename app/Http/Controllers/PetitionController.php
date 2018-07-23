@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Analysis;
 use App\Log;
 use App\Volunteer;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use App\Petition;
 use App\Status;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 
 class PetitionController extends Controller
@@ -240,15 +242,24 @@ class PetitionController extends Controller
 
     public function saveAssign(Request $request)
     {
+        try {
 
-        $petition = Petition::find($request->input('project_id'));
-        $petition->status_id = $request->input('status');
-        $petition->volunteer_id = $request->input('volunteer_id');
-
-        $petition->save();
-
+            $analysis = new Analysis();
+            // find petition
+            $petition = Petition::findOrFail($request->input('project_id'));
+            $petition->status_id = $request->input('status');
+            //find volunteer
+            $volunteer = Volunteer::findOrFail($request->input('volunteer_id'));
+            if($petition->save()){
+                $analysis->volunteer_id = $volunteer->id;
+                $analysis->petition_id = $petition->id;
+                $analysis->save();
+            }
+            // save send a mail to volunteer with new task added
+            dd($analysis);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
         return redirect()->action('PetitionController@showPetitionsInAnalysis');
-
-
     }
 }

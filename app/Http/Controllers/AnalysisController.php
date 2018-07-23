@@ -7,10 +7,7 @@ use Illuminate\Http\Request;
 class AnalysisController extends Controller
 {
 
-    public function newAnalysis()
-    {
-        
-    }
+
     /**
      * Display a listing of the resource.
      *
