@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class AnalysisController extends Controller
 {
@@ -22,7 +23,10 @@ class AnalysisController extends Controller
 
     public function index()
     {
-        return Auth::user()->volunteer->analysis;
+        $user = User::findOrfail(Auth::user()->id);
+        $petitions = $user->volunteer->analysis;
+        $title = 'Minhas tarefas';
+        return view('volunteer-dashboard.assignments', compact('petitions','title'));
     }
 
     /**
