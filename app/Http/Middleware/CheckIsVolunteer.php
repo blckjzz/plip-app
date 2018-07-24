@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckIsAdmin
+class CheckIsVolunteer
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class CheckIsAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->role->id == 1) {
+            if (Auth::user()->role->id == 2) {
                 return $next($request);
             }
-            abort(403, 'YOU MUST BE AN ADMIN USER TO PERFORM THIS ACTION!');
+            abort(403, 'YOU MUST BE AN VOLUNTEER USER TO PERFORM THIS ACTION!');
         }
 
     }
