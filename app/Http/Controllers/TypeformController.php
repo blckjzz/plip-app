@@ -16,7 +16,7 @@ class TypeformController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','isAdmin']);
         $this->formId = env("TYPEFORM_FORM_ID");
         $this->key = env("TYPEFORM_KEY");
         $this->baseUri = "https://api.typeform.com/v1/form/$this->formId?key=$this->key";

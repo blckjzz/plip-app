@@ -9,7 +9,7 @@ class VolunteerController extends Controller
 {
     function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','isAdmin']);
     }
 
     /**
@@ -19,6 +19,7 @@ class VolunteerController extends Controller
      */
     public function index()
     {
+
         $voluntarios = Volunteer::all();
         return view('volunteer.index', ['voluntarios' => $voluntarios]);
     }

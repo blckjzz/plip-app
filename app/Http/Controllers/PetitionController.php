@@ -19,7 +19,7 @@ class PetitionController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','isAdmin']);
         $this->typeformController = new TypeformController();
     }
 
