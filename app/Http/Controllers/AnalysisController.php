@@ -13,6 +13,7 @@ class AnalysisController extends Controller
     public function __construct()
     {
         $this->middleware(['auth']);
+        $this->middleware(['isVolunteer']);
     }
 
     /**
@@ -58,7 +59,7 @@ class AnalysisController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
