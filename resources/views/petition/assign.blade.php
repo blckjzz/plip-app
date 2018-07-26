@@ -42,7 +42,7 @@
                         <option>Selecione um Voluntário</option>
                         @foreach($volunteers as $volunteer)
                             <option value="{{$volunteer->id}}">
-                                {{ $volunteer->name }}
+                                {{ $volunteer->user->name }}
                             </option>
                         @endforeach
                     </select>
