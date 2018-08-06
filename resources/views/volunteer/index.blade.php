@@ -19,10 +19,10 @@
         @foreach ($voluntarios as $voluntario)
             <tr>
                 <th>{{ $voluntario->id }}</th>
-                <td>{{ str_limit($voluntario->name, 30) }} </td>
+                <td>{{ str_limit($voluntario->user->name, 30) }} </td>
+                <td>{{ str_limit($voluntario->telephone, 30) }} </td>
                 <td>{{ str_limit($voluntario->personal_email, 30) }} </td>
-                <td>{{ str_limit($voluntario->volunteer_mail, 30) }} </td>
-                <td>{{ str_limit($voluntario->volunteer_mail, 30) }} </td>
+                <td>{{ str_limit($voluntario->user->email, 30) }} </td>
                 <td>
                     <a href="{{ action('VolunteerController@show', $voluntario->id) }}"><span class="fa fa-eye"></span></a>
                     <a href="{{ action('VolunteerController@edit', $voluntario->id) }}"><span class="fa fa-pencil"></span></a>
