@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Analysis;
+use App\Petition;
+use App\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
@@ -35,9 +39,12 @@ class AnalysisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($petition_id)
     {
-        //
+        // returns page where volunteer post analysis for a project
+        $petition = Petition::findOrFail($petition_id);
+        $status  = Status::all();
+        return view('volunteer-dashboard.register-assignment', compact('petition', 'status'));
     }
 
     /**
@@ -48,7 +55,16 @@ class AnalysisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // stores volunteer analysis
+        $user = User::findOrfail(Auth::user()->id);
+        #dd($request->all());
+        $analysis = new Analysis($request->all());
+        $analysis->volunteer_id = $user->volunteer->id;
+        $analysis->syncChanges($analysis, array($analysis));
+        $petition = Petition::find($request->only('petition_id'));
+        dd($petition);
+        return redirect()->action('AnalysisController@index')->with(['message' => "Análise alterada com sucesso!"]);;
+
     }
 
     /**
@@ -59,7 +75,7 @@ class AnalysisController extends Controller
      */
     public function show($id)
     {
-
+        // show volunteer analysis
     }
 
     /**
@@ -70,7 +86,7 @@ class AnalysisController extends Controller
      */
     public function edit($id)
     {
-        //
+        // volunteer can edit its analysis
     }
 
     /**
@@ -82,7 +98,7 @@ class AnalysisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update analysis
     }
 
     /**
@@ -94,5 +110,6 @@ class AnalysisController extends Controller
     public function destroy($id)
     {
         //
+        abort(403, 'you can not perform this action!');
     }
 }

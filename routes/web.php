@@ -30,3 +30,4 @@ Route::get('/trello/create', 'TrelloController@createTrelloCard');
 Route::get('/trello/push', 'TrelloController@pushPlipToTrello');
 Route::resource('/voluntarios', 'VolunteerController');
 Route::resource('/analysis', 'AnalysisController');
+Route::get('/analysis/create/{petition_id}','AnalysisController@create');

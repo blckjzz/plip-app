@@ -27,9 +27,9 @@
                 <td>{{ $petition->submitDate->diffForHumans()}} </td>
 
                 <td>
-                    @if(isset($petition->volunteer->id))
-                    <a href="{{ action('VolunteerController@show', $petition->volunteer->id) }}">
-                        {{ $petition->volunteer->name }}
+                    @if(isset($petition->analise->analista->user->name))
+                    <a href="{{ action('VolunteerController@show', $petition->analise->analista->id) }}">
+                        {{ $petition->analise->analista->user->name}}
                     </a>
                     @endif
                 </td>

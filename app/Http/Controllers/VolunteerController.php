@@ -56,7 +56,7 @@ class VolunteerController extends Controller
      */
     public function show(Volunteer $volunteer)
     {
-        //
+        dd($volunteer);
     }
 
     /**

@@ -19,14 +19,21 @@ class Volunteer extends Model
         'is_active' => 'boolean',
     ];
 
+    /*
     public function analysis()
     {
         return $this->belongsToMany('App\Petition', 'analyses', 'volunteer_id', 'petition_id');
     }
+    */
 
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function analisa()
+    {
+        return $this->hasOne('App\Analysis');
     }
 
 

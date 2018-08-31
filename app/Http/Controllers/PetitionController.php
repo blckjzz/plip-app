@@ -222,7 +222,7 @@ class PetitionController extends Controller
 
     public function showPetitionsInAnalysis()
     {
-        $petitions = Petition::all()->where('status_id', '=', '2');
+        $petitions = Petition::all()->where('status_id','=', 2);
         return view('petition.petition', ['petitions' => $petitions]);
     }
 
@@ -230,14 +230,14 @@ class PetitionController extends Controller
     {
         // list petitions
         // add status equals novo # 1
-        $petitions = Petition::all()->where('status_id', '=', '1')->where('volunteer_id', '=', '');
+        $petitions = Petition::all()->where('status_id', '=', '1');
 
         // list volunteers
         $volunteers = Volunteer::all();
         // list status
         $status = Status::all();
         // create another function where save the data and stores into the database
-        return view('petition.assign', ['petitions' => $petitions, 'volunteers' => $volunteers, 'status' => $status]);
+        return view('petition.create-assignment', ['petitions' => $petitions, 'volunteers' => $volunteers, 'status' => $status]);
 
     }
 
@@ -248,16 +248,18 @@ class PetitionController extends Controller
             $analysis = new Analysis();
             // find petition
             $petition = Petition::findOrFail($request->input('project_id'));
-            $petition->status_id = $request->input('status');
+            // always with status two = analise
+            $petition->status_id = 2;
             //find volunteer
             $volunteer = Volunteer::findOrFail($request->input('volunteer_id'));
+
             if($petition->save()){
                 $analysis->volunteer_id = $volunteer->id;
                 $analysis->petition_id = $petition->id;
                 $analysis->save();
             }
             // save send a mail to volunteer with new task added
-            dd($analysis);
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
