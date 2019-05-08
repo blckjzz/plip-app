@@ -18,30 +18,40 @@ class TypeformController extends Controller
     {
         $this->middleware(['auth','isAdmin']);
         $this->formId = env("TYPEFORM_FORM_ID");
-        $this->key = env("TYPEFORM_KEY");
-        $this->baseUri = "https://api.typeform.com/v1/form/$this->formId?key=$this->key";
+        $this->token = env("TYPEFORM_TOKEN");
+        $this->baseUri = "https://api.typeform.com/forms/".$this->formId."/responses";
+        $this->until = '';
     }
 
     public function getTypeformAnswers($since, $until = '')
     {
         try {
 
-            $this->since = Carbon::createFromFormat('Y-m-d H:i:s', $since, 'America/Sao_Paulo')->timestamp;
+            $since = Carbon::parse($since)->toIso8601ZuluString();
 
-            if (isset($until) || $until == '') {
-                $until = Carbon::now('America/Sao_Paulo');
-            }
+//            $until = Carbon::parse($until)->toIso8601ZuluString();
 
-            $this->until = Carbon::createFromFormat('Y-m-d H:i:s', $until)->timestamp;
+            $headers = [
+                'Authorization' => 'Bearer ' . $this->token,
+                'Accept'        => 'application/json',
+            ];
+
+
             $client = new Client();
-            $uri = $this->baseUri . '&since=' . $this->since . '&until=' . $this->until;
-            $result = $client->request('GET', $uri);
 
-            if ($result->getStatusCode() != 200) {
-                abort(404, 'Indisponível');
-                return false;
+            $uri = $this->baseUri.'?since='.$since.'&page_size=1000&completed=true';
+
+            $response = $client->request('GET', $uri, [
+                'headers' => $headers
+            ]);
+
+            echo $uri;
+
+            if ($response->getStatusCode() != 200) {
+                return abort(404, 'Indisponível');
             }
-            return json_decode($result->getBody(), true);
+
+            return json_decode($response->getBody(), true);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
