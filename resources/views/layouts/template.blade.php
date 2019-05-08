@@ -174,7 +174,8 @@
                     @endif
                 </div>
             </div>
-        @if(Auth::user()->role->id == 1)
+
+        @if(Auth::user()->role->id = 1)
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -301,7 +302,7 @@
             <!-- Main row -->
             @yield('cards')
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-md-8">
                     @if (session('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}
