@@ -26,7 +26,8 @@ class Petition extends Model
         'sender_name',
         'sender_mail',
         'sender_telephone',
-        'submitDate'
+        'submitDate',
+        'token',
     ];
 
     protected $dates = ['submitDate'];
