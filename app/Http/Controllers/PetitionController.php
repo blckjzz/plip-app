@@ -17,6 +17,7 @@ use function PHPSTORM_META\type;
 class PetitionController extends Controller
 {
     private $typeformController;
+    private $petition;
 
     public function __construct()
     {
@@ -39,8 +40,8 @@ class PetitionController extends Controller
         try {
 
 //            echo $latestSyncDate;
-//            $response = $this->typeformController->getTypeformAnswers($latestSyncDate[0]->sync_date);
-            $response = $this->typeformController->getTypeformAnswers('2018-03-01 00:00:00');
+            $response = $this->typeformController->getTypeformAnswers($latestSyncDate[0]->sync_date);
+//            $response = $this->typeformController->getTypeformAnswers('2019-03-01 00:00:00');
             $this->store($response);
             return response()->json($response);
         } catch (\Exception $e) {
@@ -58,98 +59,28 @@ class PetitionController extends Controller
 
             echo PHP_EOL . 'Total de respostas:' . count($responses['items']) . PHP_EOL;
             $qtd = 0;
-            if (count($responses['items']) > 0) {
-                foreach ($responses['items'] as $array) {
-                    $plip = new Petition();
-                    (isset($array['submitted_at'])) ? var_dump(str_limit($array['submitted_at'], 50)) : '';
-                    (isset($array['response_id'])) ? var_dump(str_limit($array['response_id'], 50)) : '';
-                    if (!array_key_exists('answers', $array)) {
-                        next($array);
+            if (is_array($responses['items']) && count($responses['items']) > 0) {
+                foreach ($responses['items'] as $form) {
+                    if (!array_key_exists('answers', $form)) {
+                        next($form);
                     } else {
                         print('------- inicio pl ----' . PHP_EOL);
-                        foreach ($array['answers'] as $answer) { // aqui tenho no answer um array de arrays, onde cada array é uma resposta do formulário
-//                        print_r($answer);
-                            $plip->submitDate = $array['submitted_at'];
-                            $rep = array_merge($answer, $answer['field']);
-
-                            if ($rep['id'] === 'AkbyrKsQvlVJ') {
-                                print("Projeto de LEI:" . $rep['text']) . PHP_EOL;
-                                if (empty($rep['text'])) {
-                                    $plip->name = 'PROJETO DE LEI SEM NOME';
-                                    print("Projeto de LEI:" . $plip->name) . PHP_EOL;
-                                } else {
-                                    print("Projeto de LEI:" . $rep['text']) . PHP_EOL;
-                                    $plip->name = $rep['text'];
-                                }
-
-                            }
-
-//                        // Texto do projeto
-                            if ($rep['id'] == 'bFx24eWPri6j') {
-                                print("Texto do Projeto: " . $rep['text'] . PHP_EOL);
-                                $plip->text = $rep['text'];
-                            }
-
-                            // é nacional?
-                            if ($rep['id'] == 'yd0ahtxZTFUs') {
-                                print("Abrangencia: " . $rep['choice']['label'] . PHP_EOL);
-                                $plip->wide = $rep['choice']['label'];
-
-                            }
-
-                            if ($rep['id'] == 'WNCltuKyCogK') {
-                                print("É nacional? " . $rep['text'] . PHP_EOL);
-                                $plip->municipality = $rep['text'];
-                            }
-
-
-                            if ($rep['id'] == 'GtpM2IMm1BDM') {
-                                print("Estado? " . $rep['text'] . PHP_EOL);
-                                $plip->state = $rep['text'];
-                            }
-
-
-                            if ($rep['id'] == 'qai1yFnkufjh') {
-                                print("video: " . $rep['url'] . PHP_EOL);
-                                $plip->video_url = $rep['url'];
-                            }
-
-                            if ($rep['id'] == '52264641') {
-                                print("referencias: " . $rep['boolean'] . PHP_EOL);
-                                $plip->references = $rep['boolean'];
-                            }
-
-
-                            if ($rep['id'] == '52268594') {
-                                print("Proponente: " . $rep['text'] . PHP_EOL);
-                                $plip->sender_name = $rep['text'];
-                            }
-
-                            if ($rep['id'] == '52268630') {
-                                print("Email proponente: " . $rep['email'] . PHP_EOL);
-                                $plip->sender_mail = $rep['email'];
-                            }
-
-                            if ($rep['id'] == 'DcjgsmwtRf0w') {
-                                print("Telefone proponente: " . $rep['text'] . PHP_EOL);
-                                $plip->sender_telephone = $rep['text'];
-                            }
-
-                            print('------- campo ----' . PHP_EOL);
-
-
+                        $plip = new Petition();
+                        $plip->submitDate = Carbon::parse($form['submitted_at']);
+                        $plip->token = $form['token'];
+                        foreach ($form['answers'] as $answer) { // aqui tenho no answer um array de arrays, onde cada array é uma resposta do formulário
+                            $this->fillPetitionObject($answer, $plip);  // cada answer é uma resposta de um formulário
                         }
                         $qtd++;
-                        print('PL nro' . $qtd . PHP_EOL);
-                        print('-------PLIP fim ----' . PHP_EOL);
-                        //status_id = 1 means novo
+                        print('Petition number: [' . $qtd . '] ' . PHP_EOL);
+                        /**
+                         * status 1 means under review of a volunteer
+                         */
                         $plip->status_id = 1;
                         $plip->save();
                         $log->quantity++;
                         echo 'Saving [' . $plip->name . '] project to database' . PHP_EOL;
                     }
-
-
 
                 }
             } else {
@@ -158,23 +89,19 @@ class PetitionController extends Controller
             }
         } catch
         (\Exception $e) {
-            echo $e->getMessage();
+            print_r($e->getMessage());
             return response(['message' => 'Something went wrong, check the message', 'exceptions' => $e->getMessage()], 500)
                 ->header('Content-Type', 'application/json');
+        } finally {
+            // Log the event everytime that plips are synced
+            $log->motive = 'PLIP_SYNC';
+            $log->sync_date = Carbon::now('America/Sao_Paulo');
+            $log->saveOrFail();
+            # Debug on console
+            echo 'Total of: [' . $log->quantity . '] project were synced' . PHP_EOL;
         }
-
-//        finally {
-//            // Log the event everytime that plips are synced
-//            $log->motive = 'PLIP_SYNC';
-//            $log->sync_date = Carbon::now('America/Sao_Paulo');
-//            $log->saveOrFail();
-//            # Debug on console
-//            echo 'Total of: [' . $log->quantity . '] project were synced';
-//        }
         return response(['message' => 'There is no plip to be synced', 'log' => $log], 200)
             ->header('Content-Type', 'application/json');
-
-
     }
 
     public
@@ -262,5 +189,69 @@ class PetitionController extends Controller
             return $e->getMessage();
         }
         return redirect()->action('PetitionController@showPetitionsInAnalysis');
+    }
+
+    /**
+     * @param $answer
+     * @param Petition $plip
+     */
+    public function fillPetitionObject($answer, Petition $plip): void
+    {
+
+        if ($answer['field']['id'] === 'AkbyrKsQvlVJ') {
+            print("Projeto de LEI:" . $answer['text']) . PHP_EOL;
+            $plip->name = $answer['text'];
+        }
+
+        //                        // Texto do projeto
+        if ($answer['field']['id'] == 'bFx24eWPri6j') {
+            print("Texto do Projeto: " . $answer['text'] . PHP_EOL);
+            $plip->text = $answer['text'];
+        }
+
+        // é nacional? //true or false (0/1)
+        if ($answer['field']['id'] == 'yd0ahtxZTFUs') {
+            print("Abrangencia: " . $answer['choice']['label'] . PHP_EOL);
+            $plip->wide = $answer['choice']['label'];
+
+        }
+
+        if ($answer['field']['id'] == 'WNCltuKyCogK') {
+            print("É Municipio? " . $answer['text'] . PHP_EOL);
+            $plip->municipality = $answer['text'];
+        }
+
+        // se for nacional ou municipal, campo vazio.
+        if ($answer['field']['id'] == 'GtpM2IMm1BDM') {
+            print("Estado? " . $answer['text'] . PHP_EOL);
+            $plip->state = $answer['text'];
+        }
+
+
+        if ($answer['field']['id'] == 'qai1yFnkufjh') {
+            print("video: " . $answer['url'] . PHP_EOL);
+            $plip->video_url = $answer['url'];
+        }
+
+        if ($answer['field']['id'] == '52264641') {
+            print("referencias: " . $answer['boolean'] . PHP_EOL);
+            $plip->references = $answer['boolean'];
+        }
+
+
+        if ($answer['field']['id'] == '52268594') {
+            print("Proponente: " . $answer['text'] . PHP_EOL);
+            $plip->sender_name = $answer['text'];
+        }
+
+        if ($answer['field']['id'] == '52268630') {
+            print("Email proponente: " . $answer['email'] . PHP_EOL);
+            $plip->sender_mail = $answer['email'];
+        }
+
+        if ($answer['field']['id'] == 'DcjgsmwtRf0w') {
+            print("Telefone proponente: " . $answer['text'] . PHP_EOL);
+            $plip->sender_telephone = $answer['text'];
+        }
     }
 }

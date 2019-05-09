@@ -36,16 +36,15 @@ class TypeformController extends Controller
                 'Accept'        => 'application/json',
             ];
 
-
             $client = new Client();
 
-            $uri = $this->baseUri.'?since='.$since.'&page_size=1000&completed=true';
+            $uri = $this->baseUri.'?since='.$since.'&page_size=1000&completed';
 
             $response = $client->request('GET', $uri, [
                 'headers' => $headers
             ]);
 
-            echo $uri;
+            echo 'API call: '. $uri.''.PHP_EOL;
 
             if ($response->getStatusCode() != 200) {
                 return abort(404, 'Indisponível');
