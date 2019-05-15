@@ -26,7 +26,7 @@ class VolunteerCreationRequest extends FormRequest
         return [
             'email' => 'required|unique:users',
             'password' => 'required',
-            'personal_mail' => 'required|exists:volunteers|unique',
+            'personal_email' => 'required|unique:volunteers',
             'telephone' => 'min:9',
             'volunteer_since' => 'required'
         ];
