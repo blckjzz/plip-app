@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group">
-                    <a href="{{ URL::previous() }}">
+                    <a href="/" target="_blank">
                         <button type="button" class="btn btn-primary">Voltar</button>
                     </a>
                 </div>

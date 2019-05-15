@@ -177,107 +177,106 @@
 
         @if(Auth::user()->role->id = 1)
             <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link">
-                            <i class="nav-icon fa fa-dashboard"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="{{ url('/') }}" class="nav-link">
+                                <i class="nav-icon fa fa-dashboard"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
 
-                </ul>
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-file nav-icon"></i>
-                            <p> Petições
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ action('PetitionController@index') }}" class="nav-link ">
-                                    <i class="fa fa-list nav-icon"></i>
-                                    <p>Lista de Projetos</p>
-                                </a>
-                            </li>
+                    </ul>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-file nav-icon"></i>
+                                <p> Petições
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ action('PetitionController@index') }}" class="nav-link ">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p>Lista de Projetos</p>
+                                    </a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a href="{{action('PetitionController@assign')}}" class="nav-link ">
-                                    <i class="fa fa-plus-circle nav-icon"></i>
-                                    <p>Cadastrar análise</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-user-circle nav-icon"></i>
-                            <p> Voluntários
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-
-                                <a href="{{ action('VolunteerController@index') }}" class="nav-link ">
-                                    <i class="fa fa-list nav-icon"></i>
-                                    <p>Lista de Voluntários</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ action('VolunteerController@create') }}" class="nav-link ">
-                                    <i class="fa fa-plus-circle nav-icon"></i>
-                                    <p>Cadastrar Voluntário</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                @endif
-                @if(Auth::user()->role->id == 2)
+                                <li class="nav-item">
+                                    <a href="{{action('PetitionController@assign')}}" class="nav-link ">
+                                        <i class="fa fa-plus-circle nav-icon"></i>
+                                        <p>Cadastrar análise</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fa fa-book nav-icon"></i>
-                                <p> Análise de projetos
+                                <i class="fa fa-user-circle nav-icon"></i>
+                                <p> Voluntários
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
 
-                                    <a href="{{ action('AnalysisController@index') }}" class="nav-link ">
+                                    <a href="{{ action('VolunteerController@index') }}" class="nav-link ">
                                         <i class="fa fa-list nav-icon"></i>
-                                        <p>Minhas Análises</p>
+                                        <p>Lista de Voluntários</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="{{ action('VolunteerController@create') }}" class="nav-link ">
+                                        <i class="fa fa-plus-circle nav-icon"></i>
+                                        <p>Cadastrar Voluntário</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
-                @endif
-            </nav>
-            <!-- /.sidebar-menu -->
+                    @endif
+                    @if(Auth::user()->role->id == 2)
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
+                                 with font-awesome or any other icon font library -->
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-book nav-icon"></i>
+                                    <p> Análise de projetos
+                                        <i class="right fa fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+
+                                        <a href="{{ action('AnalysisController@index') }}" class="nav-link ">
+                                            <i class="fa fa-list nav-icon"></i>
+                                            <p>Minhas Análises</p>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
+                </nav>
+                <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -287,26 +286,24 @@
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">@yield('pageTitle')</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        </ol>
-                    </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <section class="content">
+        <section class="container-fluid">
             <!-- Main row -->
             @yield('cards')
             <div class="row">
                 <div class="col-md-8">
-                    @if (session('message'))
+                    @if(session('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}
                         </div>
+                    @endif
+                    @if ($errors->any())
+                        <ul>{!! implode('', $errors->all('<li style="color:red">:message</li>')) !!}</ul>
                     @endif
                     @yield('content')
                 </div>
