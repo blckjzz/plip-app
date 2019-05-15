@@ -21,11 +21,11 @@ class TrelloController extends Controller
     {
 
         $this->middleware(['auth','isAdmin']);
-        $this->trelloClient = new \Trello\Client(env('TRELLO_KEY'));
-        $this->trelloClient->setAccessToken(env('TRELLO_TOKEN'));
-        $this->board = new \Trello\Model\Board($this->trelloClient);
-        $this->board->setId(env('TRELLO_BOARD_ID'));
-        $this->trelloListId = env('TRELLO_LIST_ID');
+//        $this->trelloClient = new \Trello\Client(env('TRELLO_KEY'));
+//        $this->trelloClient->setAccessToken(env('TRELLO_TOKEN'));
+//        $this->board = new \Trello\Model\Board($this->trelloClient);
+//        $this->board->setId(env('TRELLO_BOARD_ID'));
+//        $this->trelloListId = env('TRELLO_LIST_ID');
     }
 
     public function getTrelloBoardInfos()
