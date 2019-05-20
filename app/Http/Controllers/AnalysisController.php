@@ -13,13 +13,6 @@ use App\User;
 class AnalysisController extends Controller
 {
 
-
-    public function __construct()
-    {
-        $this->middleware(['auth']);
-        $this->middleware(['isVolunteer']);
-    }
-
     /**
      * Display a listing of the resource.
      *
