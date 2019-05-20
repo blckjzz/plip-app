@@ -175,25 +175,27 @@
                 </div>
             </div>
 
-        @if(Auth::user()->role->id = 1)
-            <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="{{ url('/') }}" class="nav-link">
-                                <i class="nav-icon fa fa-dashboard"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
 
-                    </ul>
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}" class="nav-link">
+                            <i class="nav-icon fa fa-dashboard"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                </ul>
+                @if(Auth::user()->role->id == 1)
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-file nav-icon"></i>
@@ -246,34 +248,40 @@
                             </ul>
                         </li>
                     </ul>
-                    @endif
-                    @if(Auth::user()->role->id == 2)
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-                                 with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-book nav-icon"></i>
-                                    <p> Análise de projetos
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
+            @elseif(Auth::user()->role->id == 2) <!---//inicio voluntario menu --->
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-book nav-icon"></i>
+                            <p> Análise de projetos
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+
+                                <a href="{{ action('AnalysisController@index') }}" class="nav-link ">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Minhas Análises</p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
 
-                                        <a href="{{ action('AnalysisController@index') }}" class="nav-link ">
-                                            <i class="fa fa-list nav-icon"></i>
-                                            <p>Minhas Análises</p>
-                                        </a>
-                                    </li>
-
-                                </ul>
+                                <a href="{{ action('VolunteerController@getSelfAssignView') }}" class="nav-link ">
+                                    <i class="fa fa-book nav-icon"></i>
+                                    <p>Adote um PL</p>
+                                </a>
                             </li>
                         </ul>
-                    @endif
-                </nav>
-                <!-- /.sidebar-menu -->
+                    </li>
+
+                </ul>
+            @endif <!-- Fim menu voluntário --->
+            </nav>
+            <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
     </aside>
