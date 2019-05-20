@@ -38,6 +38,7 @@ route::prefix('admin', ['middleware' => ['auth', 'isAdmin']])->group(function ()
 
 
 route::middleware(['auth', 'isVolunteer'])->prefix('voluntario')->group(function () {
+
     Route::GET('/self-assign', 'VolunteerController@getSelfAssignView');
     Route::POST('/self-assign', 'VolunteerController@saveSelfAssign');
 });
