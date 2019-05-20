@@ -21,7 +21,6 @@ class PetitionController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth']);
         $this->middleware(['isAdmin'])->except('showPetition');
         $this->typeformController = new TypeformController();
     }
@@ -190,6 +189,8 @@ class PetitionController extends Controller
         }
         return redirect()->action('PetitionController@showPetitionsInAnalysis');
     }
+
+
 
     /**
      * @param $answer
