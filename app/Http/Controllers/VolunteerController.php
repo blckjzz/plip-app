@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VolunteerCreationRequest;
+use App\Petition;
 use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
@@ -10,10 +11,6 @@ use DB;
 
 class VolunteerController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware(['auth', 'isAdmin']);
-    }
 
     /**
      * Display a listing of the resource.
@@ -22,7 +19,6 @@ class VolunteerController extends Controller
      */
     public function index()
     {
-
         $voluntarios = Volunteer::all();
         return view('volunteer.index', ['voluntarios' => $voluntarios]);
     }
@@ -103,5 +99,17 @@ class VolunteerController extends Controller
     public function destroy(Volunteer $volunteer)
     {
         //
+    }
+
+    public function getSelfAssignView()
+    {
+        // Petitions novas status_id = 1
+        $petitions = Petition::all()->where('status_id', '=', 1);
+        return view('volunteer.auto-assign', ['petitions' => $petitions]);
+    }
+
+    public function saveSelfAssign(Request $request)
+    {
+        dd($request->all());
     }
 }
