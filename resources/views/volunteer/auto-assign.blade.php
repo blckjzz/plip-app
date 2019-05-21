@@ -26,14 +26,13 @@
                 <td>{{ $petition->submitDate->diffForHumans()}} </td>
                 <td>{{ $petition->status->status }}</td>
                 <td>
-
                     <a href="{{ action('PetitionController@showPetition', $petition->id) }}"><input
-                                class="btn btn-primary" type="button" value="Ver detalhes"/>
+                                class="btn btn-block btn-primary" type="button" value="Ver detalhes"/>
                     </a>
 
 
                     <a href="{{ action('AnalysisController@create', $petition->id) }}"><input
-                                class="btn btn-success" type="button" value="Adotar PL"/></a>
+                                class="btn btn-block btn-success" type="button" value="Adotar PL"/></a>
 
                 </td>
             </tr>
