@@ -25,21 +25,22 @@ route::prefix('admin', ['middleware' => ['auth', 'isAdmin']])->group(function ()
     Route::get('/petition/assign', 'PetitionController@assign');
     Route::post('/petition/assign', 'PetitionController@saveAssign');
     Route::post('/petition/save', 'PetitionController@save');
-    Route::get('/petition/sync', 'PetitionController@syncPlips');
+//    Route::get('/petition/sync', 'PetitionController@syncPlips');
     Route::get('/petition/in-analysis', 'PetitionController@showPetitionsInAnalysis');
     Route::get('/petition/new-petitions', 'PetitionController@showNewPetitions');
-    Route::get('/trello/info', 'TrelloController@getTrelloBoardInfos');
-    Route::get('/trello/create', 'TrelloController@createTrelloCard');
-    Route::get('/trello/push', 'TrelloController@pushPlipToTrello');
-    Route::resource('/analysis', 'AnalysisController');
-    Route::get('/analysis/create/{petition_id}', 'AnalysisController@create');
+//    Route::get('/trello/info', 'TrelloController@getTrelloBoardInfos');
+//    Route::get('/trello/create', 'TrelloController@createTrelloCard');
+//    Route::get('/trello/push', 'TrelloController@pushPlipToTrello');
     Route::resource('/voluntarios', 'VolunteerController');
 });
 
 
 route::middleware(['auth', 'isVolunteer'])->prefix('voluntario')->group(function () {
-
-    Route::GET('/self-assign', 'VolunteerController@getSelfAssignView');
-    Route::POST('/self-assign', 'VolunteerController@saveSelfAssign');
+    Route::resource('/analise', 'AnalysisController');
+    Route::get('/peticao/detalhe/{id}', 'VolunteerController@viewPetitionDetails');
+    Route::get('/analise/criar/{petition_id}', 'AnalysisController@create');
+    Route::GET('/adotar', 'VolunteerController@getSelfAssignView');
+    Route::GET('/adotar/{id}', 'VolunteerController@saveSelfAssign');
+    Route::GET('/minhas-analises', 'VolunteerController@getAnalises');
 });
 
