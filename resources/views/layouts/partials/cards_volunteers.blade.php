@@ -5,14 +5,13 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $reports['petitionCount'] }}</h3>
-
-                    <p>Projetos</p>
+                    <h3>#Valor</h3>
+                    <p>PL Adotados</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-file"></i>
                 </div>
-                <a href="{{ action('PetitionController@index') }}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -20,9 +19,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{ $reports['petitionInAnalisys'] }}</h3>
+                    <h3>#Valor</h3>
 
-                    <p>Projetos em análise</p>
+                    <p>Minhas Análises</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -42,7 +41,7 @@
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="{{action('PetitionController@showNewPetitions')}}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"><i class="fa"></i></a>
             </div>
         </div>
         <!-- ./col -->
