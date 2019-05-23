@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Analysis;
 use App\Http\Requests\VolunteerCreationRequest;
 use App\Petition;
 use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class VolunteerController extends Controller
 {
@@ -105,11 +108,40 @@ class VolunteerController extends Controller
     {
         // Petitions novas status_id = 1
         $petitions = Petition::all()->where('status_id', '=', 1);
-        return view('volunteer.auto-assign', ['petitions' => $petitions]);
+        return view('volunteer-dashboard.auto-assign', ['petitions' => $petitions]);
     }
 
-    public function saveSelfAssign(Request $request)
+    public function saveSelfAssign($id)
     {
-        dd($request->all());
+        try {
+
+            $petition = Petition::findOrFail($id);
+            if (!$petition->analise) {
+                $analise = new Analysis();
+                $analise->volunteer_id = Auth::user()->volunteer->id;
+                $analise->petition_id = $petition->id;
+                $petition->status_id = 2; // em análise
+                $petition->save();
+                $analise->save();
+                return redirect()->back()->with(['success' => 'Você adotou um PL. Agora poderá fazer sua análise. Parabéns =)']);
+            }
+            return redirect()->action('VolunteerController@getSelfAssignView')
+                                ->with('error' , 'Parece que algo deu errado. Tente novamente!');
+        } catch (Exception $exception) {
+
+        }
+    }
+
+    public function viewPetitionDetails($id)
+    {
+        $ptc = new PetitionController();
+        return $ptc->showPetition($id);
+    }
+
+    public function getAnalises()
+    {
+        $petitions = Auth::user()->volunteer->analises;
+        dd($petitions);
+        return view('volunteer.assignments', compact('petitions'));
     }
 }
