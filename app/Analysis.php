@@ -18,7 +18,7 @@ class Analysis extends Model
 
     public function peticao()
     {
-        return $this->belongsTo('App\Petition');
+        return $this->belongsTo('App\Petition', 'petition_id');
     }
 
 

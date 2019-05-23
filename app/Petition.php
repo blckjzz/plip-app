@@ -37,19 +37,10 @@ class Petition extends Model
         return $this->belongsTo('App\Status');
     }
 
-
-    /*
-    public function analysis()
+    public function analista()
     {
-        return $this->belongsToMany('App\Volunteer', 'analyses',
-                                    'petition_id',
-                                    'volunteer_id')
-                                    ->withPivot('volunteer_id', 'petition_id', 'analisys_text',
-                                        'referral_law', 'law_link', 'percent_votes',
-                                        'vote_number', 'minimum_signatures');
+        $this->belongsTo('App\Volunteer','volunteer_id');
     }
-    */
-
     public function analise()
     {
         return $this->hasOne('App\Analysis');

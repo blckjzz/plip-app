@@ -18,12 +18,11 @@ class Volunteer extends Model
         'is_active' => 'boolean',
     ];
 
-    /*
-    public function analysis()
+
+    public function analises()
     {
-        return $this->belongsToMany('App\Petition', 'analyses', 'volunteer_id', 'petition_id');
+        return $this->belongsTo('App\Petition', 'volunteer_id');
     }
-    */
 
     public function user()
     {
