@@ -23,15 +23,11 @@ class AnalysisController extends Controller
     {
         $user = User::findOrfail(Auth::user()->id);
         $petitions = $user->volunteer->analysis;
-        $title = 'Minhas tarefas';
+        $title = 'Minhas análises';
         return view('volunteer-dashboard.assignments', compact('petitions','title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create($petition_id)
     {
         // returns page where volunteer post analysis for a project
@@ -39,6 +35,7 @@ class AnalysisController extends Controller
         $status  = Status::all();
         return view('volunteer-dashboard.register-assignment', compact('petition', 'status'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -56,7 +53,7 @@ class AnalysisController extends Controller
         $analysis->syncChanges($analysis, array($analysis));
         $petition = Petition::find($request->only('petition_id'));
         dd($petition);
-        return redirect()->action('AnalysisController@index')->with(['message' => "Análise alterada com sucesso!"]);;
+        return redirect()->action('AnalysisController@index')->with(['message' => "Análise armazenada com sucesso!"]);;
 
     }
 
