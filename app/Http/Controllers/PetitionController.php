@@ -21,7 +21,6 @@ class PetitionController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['isAdmin'])->except('showPetition');
         $this->typeformController = new TypeformController();
     }
 
