@@ -194,7 +194,7 @@
                 @include('layouts.partials.admin-menu') <!-- Volunteer Mennu --->
             @elseif(Auth::user()->role->id == 2)
                 @include('layouts.partials.volunteer_menu') <!-- Volunteer Mennu --->
-            @endif
+                @endif
             </nav>
             <!-- /.sidebar-menu -->
         </div>
@@ -220,14 +220,7 @@
             @yield('cards')
             <div class="row">
                 <div class="col-md-8">
-                    @if(session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
-                    @if ($errors->any())
-                        <ul>{!! implode('', $errors->all('<li style="color:red">:message</li>')) !!}</ul>
-                    @endif
+                    @include('layouts.partials.errors')
                     @yield('content')
                 </div>
             </div>
@@ -286,5 +279,16 @@
 
 <script type="text/javascript" charset="utf8"
         src="{{asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js')}}"></script>
+
+<script>
+    $(function() {
+        // setTimeout() function will be fired after page is loaded
+        // it will wait for 5 sec. and then will fire
+        // $("#successMessage").hide() function
+        setTimeout(function() {
+            $(".alert").hide('blind', {}, 500)
+        }, 3000);
+    });
+</script>
 @yield('scripts')
 </html>

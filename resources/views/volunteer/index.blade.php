@@ -31,9 +31,7 @@
         @endforeach
         </tbody>
     </table>
-
 @endsection
-
 @section('scripts')
     <script>
         $(document).ready(function () {

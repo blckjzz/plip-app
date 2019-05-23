@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
-@section('title', 'Petições disponíveis para Análise')
-@section('pageTitle', 'Escolha as petições para analisar')
+@section('title', 'Adote um PL')
+@section('pageTitle', 'Adote um PL')
 @section('content')
     <table class="" id="petitions">
         <thead>
@@ -26,14 +26,13 @@
                 <td>{{ $petition->submitDate->diffForHumans()}} </td>
                 <td>{{ $petition->status->status }}</td>
                 <td>
-                    <a href="{{ action('PetitionController@showPetition', $petition->id) }}"><input
+                    <a href="{{ action('VolunteerController@viewPetitionDetails', $petition->id) }}"><input
                                 class="btn btn-block btn-primary" type="button" value="Ver detalhes"/>
                     </a>
 
-
-                    <a href="{{ action('AnalysisController@create', $petition->id) }}"><input
-                                class="btn btn-block btn-success" type="button" value="Adotar PL"/></a>
-
+                    <a href="{{ action('VolunteerController@saveSelfAssign', $petition->id) }}">
+                        <button type="button" class="adotar btn btn-block btn-success">Adotar PL</button>
+                    </a>
                 </td>
             </tr>
         @endforeach
@@ -48,4 +47,5 @@
             $('#petitions').DataTable();
         });
     </script>
+    @include('volunteer-dashboard.partials.confirmation-adoption')
 @endsection

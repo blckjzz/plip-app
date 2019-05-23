@@ -13,12 +13,17 @@
                         <button type="button" class="btn btn-primary">Voltar</button>
                     </a>
                 </div>
-                <div class="btn-group">
-
-                    <a href="{{ action('PetitionController@edit', $petition->id)}}">
-                        <button type="button" value="Editar" class="btn btn-success">Editar</button>
+                @if(Auth::user()->role->id == 1)
+                    <div class="btn-group">
+                        <a href="{{ action('PetitionController@edit', $petition->id)}}">
+                            <button type="button" value="Editar" class="btn btn-success">Editar</button>
+                        </a>
+                    </div>
+                @elseif(Auth::user()->role->id == 2)
+                    <a href="{{ action('VolunteerController@saveSelfAssign', $petition->id) }}">
+                        <button type="button" class="adotar btn btn-success">Adotar PL</button>
                     </a>
-                </div>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -104,6 +109,7 @@
             </div>
         </div>
     </form>
-
-
+@endsection
+@section('scripts')
+    @include('volunteer-dashboard.partials.confirmation-adoption')
 @endsection
