@@ -16,7 +16,7 @@ class VolunteerController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Lista todos os voluntários cadastrados.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +27,7 @@ class VolunteerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Exibe a view de cadastro do voluntário pelo admin
      *
      * @return \Illuminate\Http\Response
      */
@@ -37,7 +37,7 @@ class VolunteerController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Cria um novo voluntário e seu usuário para acessar o painel
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -60,7 +60,7 @@ class VolunteerController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Exibe detalhes do voluntário para edição/visualização
      *
      * @param \App\Volunteer $volunteer
      * @return \Illuminate\Http\Response
@@ -104,6 +104,10 @@ class VolunteerController extends Controller
         //
     }
 
+    /**
+     * Carrega view onde o voluntário pode "Adotar PL"
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getSelfAssignView()
     {
         // Petitions novas status_id = 1
@@ -111,6 +115,11 @@ class VolunteerController extends Controller
         return view('volunteer-dashboard.auto-assign', ['petitions' => $petitions]);
     }
 
+    /**
+     * Salva um "Adota PL"
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveSelfAssign($id)
     {
         try {
@@ -126,22 +135,58 @@ class VolunteerController extends Controller
                 return redirect()->back()->with(['success' => 'Você adotou um PL. Agora poderá fazer sua análise. Parabéns =)']);
             }
             return redirect()->action('VolunteerController@getSelfAssignView')
-                                ->with('error' , 'Parece que algo deu errado. Tente novamente!');
+                ->with('error', 'Parece que algo deu errado. Tente novamente!');
         } catch (Exception $exception) {
 
         }
     }
 
+    /**
+     * Voluntário pode ver detalhes da petição ao qual adotou
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function viewPetitionDetails($id)
     {
-        $ptc = new PetitionController();
-        return $ptc->showPetition($id);
+
+        return view('volunteer-dashboard.show-assignment',
+            [
+                'petition' => Petition::findOrFail($id),
+
+            ]
+        );
     }
 
-    public function getAnalises()
+    /**
+     * Voluntário carrega a view onde exibe os PL's disponíveis para "adotar"
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getAnalisesView()
     {
-        $petitions = Auth::user()->volunteer->analises;
-        dd($petitions);
-        return view('volunteer.assignments', compact('petitions'));
+
+        $analises = Auth::user()->volunteer->analises;
+        $title = "Meus PL's adotados";
+        return view('volunteer-dashboard.assignments', compact('analises', 'title'));
+    }
+
+    public function getAnaliseView($id)
+    {
+        try {
+            $analise = Analysis::findOrFail($id);
+            if ($analise->analista->id == $analise->volunteer_id) { // refactor para um middleware
+                                                                    //(se não usuário pode alterar outras analises
+                return view('volunteer-dashboard.analises.analise', compact('analise'));
+            }
+            return 'erro, provavelmente você não pode fazer isso!';
+        } catch (Exeption $e) {
+            echo $e->getCode();
+            echo $e->getTrace();
+
+        }
+    }
+
+    public function cadastraAnalise(Request $request)
+    {
+        dd($request->all());
     }
 }
