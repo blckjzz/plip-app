@@ -36,11 +36,13 @@ route::prefix('admin', ['middleware' => ['auth', 'isAdmin']])->group(function ()
 
 
 route::middleware(['auth', 'isVolunteer'])->prefix('voluntario')->group(function () {
-    Route::resource('/analise', 'AnalysisController');
+//    Route::resource('/analise', 'AnalysisController');
     Route::get('/peticao/detalhe/{id}', 'VolunteerController@viewPetitionDetails');
     Route::get('/analise/criar/{petition_id}', 'AnalysisController@create');
     Route::GET('/adotar', 'VolunteerController@getSelfAssignView');
     Route::GET('/adotar/{id}', 'VolunteerController@saveSelfAssign');
-    Route::GET('/minhas-analises', 'VolunteerController@getAnalises');
+    Route::GET('/minhas-analises', 'VolunteerController@getAnalisesView');
+    Route::GET('/analise/{id}', 'VolunteerController@getAnaliseView');
+    Route::POST('/salvar-analise', 'VolunteerController@cadastraAnalise');
 });
 
