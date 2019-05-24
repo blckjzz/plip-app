@@ -16,9 +16,9 @@ class Analysis extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
-    public function peticao()
+    public function petition()
     {
-        return $this->belongsTo('App\Petition', 'petition_id');
+        return $this->belongsTo('App\Petition','petition_id');
     }
 
 
