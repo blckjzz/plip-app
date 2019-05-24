@@ -3,7 +3,7 @@
 @section('title', 'Minhas análises')
 @section('pageTitle', $title)
 @section('content')
-    @if(isset($petitions) > 0)
+    @if(isset($analises) > 0)
         <table class="" id="petitions">
             <thead>
             <tr>
@@ -18,17 +18,17 @@
             </thead>
             <tbody>
 
-            @foreach ($petitions as $petition)
+            @foreach ($analises as $analise)
                 <tr>
-                    <th>{{ $petition->id }}</th>
+                    <th>{{ $analise->petition->id }}</th>
                     <td>
-                        <a href="{{ action('PetitionController@showPetition', $petition->id) }}">{{ str_limit($petition->name, 30) }} </a>
-                    <td>{{ str_limit($petition->sender_name, 30) }} </td>
-                    <td>{{ str_limit($petition->sender_mail, 30) }} </td>
-                    <td>{{ $petition->submitDate->diffForHumans()}} </td>
-                    <td>{{ $petition->status->status }}</td>
+                        <a href="{{ action('PetitionController@showPetition', $analise->petition->id) }}">{{ str_limit($analise->petition->name, 30) }} </a>
+                    <td>{{ str_limit($analise->petition->sender_name, 30) }} </td>
+                    <td>{{ str_limit($analise->petition->sender_mail, 30) }} </td>
+                    <td>{{ $analise->petition->submitDate->diffForHumans()}} </td>
+                    <td>{{ $analise->petition->status->status }}</td>
                     <td>
-                        <a href="{{ action('VolunteerController@viewPetitionDetails', $petition->id) }}"><span
+                        <a href="{{ action('VolunteerController@viewPetitionDetails', $analise->petition->id) }}"><span
                                     class="fa fa-eye"></span>
                         </a>
                     </td>

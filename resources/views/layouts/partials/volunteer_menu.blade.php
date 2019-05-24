@@ -13,9 +13,9 @@
         <ul class="nav nav-treeview">
             <li class="nav-item">
 
-                <a href="{{ action('AnalysisController@index') }}" class="nav-link ">
+                <a href="{{ action('VolunteerController@getAnalisesView') }}" class="nav-link ">
                     <i class="fa fa-list nav-icon"></i>
-                    <p>Minhas Análises</p>
+                    <p>Meus PL's</p>
                 </a>
             </li>
             <li class="nav-item">

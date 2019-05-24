@@ -206,7 +206,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-md-12">
                         <h1 class="m-0 text-dark">@yield('pageTitle')</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -219,7 +219,7 @@
             <!-- Main row -->
             @yield('cards')
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     @include('layouts.partials.errors')
                     @yield('content')
                 </div>
