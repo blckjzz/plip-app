@@ -37,10 +37,7 @@ class Petition extends Model
         return $this->belongsTo('App\Status');
     }
 
-    public function analista()
-    {
-        $this->belongsTo('App\Volunteer','volunteer_id');
-    }
+
     public function analise()
     {
         return $this->hasOne('App\Analysis');
