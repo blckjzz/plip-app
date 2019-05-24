@@ -19,19 +19,14 @@ class Volunteer extends Model
     ];
 
 
-    public function analises()
-    {
-        return $this->belongsTo('App\Petition', 'volunteer_id');
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User','user_id');
     }
 
-    public function analisa()
+    public function analises()
     {
-        return $this->hasOne('App\Analysis');
+        return $this->hasMany('App\Analysis', 'volunteer_id');
     }
 
 
