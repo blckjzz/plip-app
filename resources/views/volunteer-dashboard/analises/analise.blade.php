@@ -21,6 +21,8 @@
         <div class="col-sm-6">
             <form method="post" id="form" action="{{ action('VolunteerController@cadastraAnalise')}}">
                 <input type="hidden" value="{{csrf_token()}}" name="_token" id="csrf-token"/>
+                <input type="hidden" name="petition_id" value="{{$analise->petition->id}}">
+                <input type="hidden" name="analysis_id" value="{{$analise->id}}">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Minha análise</h5>
