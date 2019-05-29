@@ -38,30 +38,31 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">Leis usadas na análise</label> <span style="color: red">*</span>
-                                <textarea name="referral_law" class="form-control"></textarea>
+                                <textarea name="referral_law" class="form-control">{{$analise->law_link}}</textarea>
                             </div>
                         </div>
-
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="">Porcentagem do eleitorado necessário: </label> <span
-                                        style="color: red">*</span>
-                                <input name="percent_votes" type="number" min="0" class="form-control"/>
-                            </div>
-                            <div class="form-group">
                                 <label for="">Eleitorado: </label> <span style="color: red">*</span>
-                                <input name="vote_number" type="number" min="0" class="form-control"/>
+                                <input id='votes' value="{{$analise->vote_number}}" name="vote_number" min="0" type="number"
+                                       class="form-control"/>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Mínimo do eleitorado necessário: </label> <span
+                                <label for="">Porcentagem do eleitorado necessário: </label><span
                                         style="color: red">*</span>
-                                <input name="minimum_signatures" type="text" class="form-control" disabled>
+                                <input id="percent" name="percent_votes" type="number" max="100" step="0.1" value="{{$analise->percent_votes}}" class="form-control"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Mínimo do eleitorado necessário:</label> <span
+                                        style="color: red">*</span>
+                                <input id="minimum" name="minimum_signatures" type="text" class="form-control" readonly="readonly"  value="{{$analise->minimum_signatures}}">
                             </div>
 
 
                             <div class="form-group">
-                                <label for="">Projeto Aprovado?</label>
+                                <label for="">Status do projeto:</label>
                                 <select name="status" class="form-control">
                                     <option disabled selected>Selecione um status</option>
                                     <option value="3">
@@ -151,4 +152,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#percent, #voters').on('keyup', function () {
+            var percentil = 0;
+            var voters = 0
+            var amount = 0;
+            percentil = $('#percent').val();
+            voters = parseInt($('#votes').val());
+            amount = voters * (percentil/100);
+            $('#minimum').attr('value', amount);
+            console.log(amount)
+        });
+    </script>
 @endsection
