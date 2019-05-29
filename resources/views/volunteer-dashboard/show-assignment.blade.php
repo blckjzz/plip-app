@@ -20,6 +20,14 @@
                                 </a>
                             </div>
                         @endif
+
+                        @if(!isset($petition->analise))
+                            <div class="btn-group">
+                                <a href="{{ action('VolunteerController@saveSelfAssign', $petition->id)}}">
+                                    <button type="button" class="btn btn-success">Adotar PL</button>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="row">
