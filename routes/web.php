@@ -10,14 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
+Auth::routes();
+//Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('admin', function () {
     return view('layouts.home');
-})->middleware('auth');
+})->middleware(['isAdmin', 'auth']);
 
-route::prefix('admin', ['middleware' => ['auth', 'isAdmin']])->group(function () {
-    Auth::routes();
-    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/petition', 'PetitionController@index');
     Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
     Route::get('petition/details/{id}', 'PetitionController@showPetition');
@@ -25,18 +24,19 @@ route::prefix('admin', ['middleware' => ['auth', 'isAdmin']])->group(function ()
     Route::get('/petition/assign', 'PetitionController@assign');
     Route::post('/petition/assign', 'PetitionController@saveAssign');
     Route::post('/petition/save', 'PetitionController@save');
-//    Route::get('/petition/sync', 'PetitionController@syncPlips');
     Route::get('/petition/in-analysis', 'PetitionController@showPetitionsInAnalysis');
     Route::get('/petition/new-petitions', 'PetitionController@showNewPetitions');
-//    Route::get('/trello/info', 'TrelloController@getTrelloBoardInfos');
-//    Route::get('/trello/create', 'TrelloController@createTrelloCard');
-//    Route::get('/trello/push', 'TrelloController@pushPlipToTrello');
-    Route::resource('/voluntarios', 'VolunteerController');
+    Route::GET('/voluntarios/criar', 'VolunteerController@create');
+    Route::GET('/voluntarios/lista', 'VolunteerController@index');
+    Route::POST('/voluntarios/salvar', 'VolunteerController@store');
+    Route::GET('/voluntarios/ver/{id}', 'VolunteerController@show');
+    Route::GET('/voluntarios/editar/{id}', 'VolunteerController@edit');
 });
 
 
 route::middleware(['auth', 'isVolunteer'])->prefix('voluntario')->group(function () {
-//    Route::resource('/analise', 'AnalysisController');
+
+    Route::get('/', 'DashboardController@getCardValues');
     Route::get('/peticao/detalhe/{id}', 'VolunteerController@viewPetitionDetails');
     Route::get('/analise/criar/{petition_id}', 'AnalysisController@create');
     Route::GET('/adotar', 'VolunteerController@getSelfAssignView');
