@@ -5,13 +5,13 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>#Valor</h3>
+                    <h3>{{$analises->count()}}</h3>
                     <p>PL Adotados</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-file"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+{{--                <a href="#" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>--}}
             </div>
         </div>
         <!-- ./col -->
@@ -19,32 +19,29 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>#Valor</h3>
+                    <h3>{{$analiseAprovada}}</h3>
 
-                    <p>Minhas Análises</p>
+                    <p>Projetos Aprovados</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                    <i class="fa fa-plus-square"></i>
                 </div>
-                <a href="{{ action('PetitionController@showPetitionsInAnalysis')}}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+{{--                <a href="{{ action('PetitionController@showPetitionsInAnalysis')}}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>--}}
             </div>
         </div>
-        <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{$reports['new_projects']}}</h3>
+                    <h3>{{$reprovadas}}</h3>
 
-                    <p>Projetos recebidos hoje</p>
+                    <p>Projetos Reprovados</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="fa fa-angle-double-down"></i>
                 </div>
-                <a href="#" class="small-box-footer"><i class="fa"></i></a>
+{{--                <a href="#" class="small-box-footer"><i></i></a>--}}
             </div>
         </div>
-        <!-- ./col -->
-
     </div>
     <!-- /.row -->
