@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Analysis;
+use App\Http\Requests\AnalysisCreateRequest;
 use App\Http\Requests\VolunteerCreationRequest;
 use App\Petition;
 use App\User;
 use App\Volunteer;
+use http\Exception\RuntimeException;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,11 @@ use Exception;
 
 class VolunteerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->only(['index', 'create', 'store']);
+        $this->middleware('checkAuthorityAnalysis')->only(['cadastraAnalise', 'getAnaliseView']);
+    }
 
     /**
      * Lista todos os voluntários cadastrados.
@@ -67,7 +74,7 @@ class VolunteerController extends Controller
      */
     public function show(Volunteer $volunteer)
     {
-        dd($volunteer);
+        return "Página em Construção!";
     }
 
     /**
@@ -137,7 +144,7 @@ class VolunteerController extends Controller
             return redirect()->action('VolunteerController@getSelfAssignView')
                 ->with('error', 'Parece que algo deu errado. Tente novamente!');
         } catch (Exception $exception) {
-
+            return $exception->getTrace();
         }
     }
 
@@ -173,11 +180,7 @@ class VolunteerController extends Controller
     {
         try {
             $analise = Analysis::findOrFail($id);
-            if ($analise->analista->id == $analise->volunteer_id) { // refactor para um middleware
-                                                                    //(se não usuário pode alterar outras analises
-                return view('volunteer-dashboard.analises.analise', compact('analise'));
-            }
-            return 'erro, provavelmente você não pode fazer isso!';
+            return view('volunteer-dashboard.analises.analise', compact('analise'));
         } catch (Exeption $e) {
             echo $e->getCode();
             echo $e->getTrace();
@@ -185,8 +188,24 @@ class VolunteerController extends Controller
         }
     }
 
-    public function cadastraAnalise(Request $request)
+    public function cadastraAnalise(AnalysisCreateRequest $request)
     {
-        dd($request->all());
+        try {
+
+            $analise = Analysis::findOrFail($request->analysis_id);
+            $analise->analisys_text = $request->analisys_text;
+            $analise->law_link = $request->referral_law;
+            $analise->percent_votes = $request->percent_votes;
+            $analise->vote_number = $request->vote_number;
+            $analise->minimum_signatures = $request->minimum_signatures;
+            $analise->petition()->update(['status_id' => $request->status]);
+            $analise->save();
+
+            // SALVAR STATUS NOVO DA PETIÇÃO
+            return redirect()->action('VolunteerController@getAnaliseView',$analise->id)->with('success','Sua análise foi registrada com sucesso!');
+
+        } catch (Exception $e) {
+            return $e->getTrace();
+        }
     }
 }
