@@ -22,6 +22,7 @@ class PetitionController extends Controller
     public function __construct()
     {
         $this->typeformController = new TypeformController();
+
     }
 
     public function index()
