@@ -147,9 +147,10 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="" href="{{ url('logout')}}">
-                    Sair
-                </a>
+                <form  method="POST" action="{{route('logout')}}">
+                    <input type="hidden" value="{{csrf_token()}}" name="_token" id="csrf-token"/>
+                    <button class="btn btn-block" type="submit">Sair</button>
+                </form>
             </li>
         </ul>
     </nav>
@@ -182,12 +183,23 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="{{ url('/') }}" class="nav-link">
-                            <i class="nav-icon fa fa-dashboard"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
+                @if(Auth::user()->role->id == 1)
+                        <li class="nav-item">
+                            <a href="{{ url('/admin') }}" class="nav-link">
+                                <i class="nav-icon fa fa-dashboard"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                @elseif(Auth::user()->role->id == 2)
+                        <li class="nav-item">
+                            <a href="{{ url('/voluntario') }}" class="nav-link">
+                                <i class="nav-icon fa fa-dashboard"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                @endif
+
+
 
                 </ul>
             @if(Auth::user()->role->id == 1)
