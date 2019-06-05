@@ -22,7 +22,7 @@
                 <tr>
                     <th>{{ $analise->petition->id }}</th>
                     <td>
-                        <a href="{{ action('PetitionController@showPetition', $analise->petition->id) }}">{{ str_limit($analise->petition->name, 30) }} </a>
+                        <a href="{{ action('VolunteerController@viewPetitionDetails', $analise->petition->id) }}">{{ str_limit($analise->petition->name, 30) }} </a>
                     <td>{{ str_limit($analise->petition->sender_name, 30) }} </td>
                     <td>{{ str_limit($analise->petition->sender_mail, 30) }} </td>
                     <td>{{ $analise->petition->submitDate->diffForHumans()}} </td>
