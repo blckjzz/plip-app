@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function getCardValues()
     {
-        $analises = Auth::user()->volunteer->analises;
+        $analises = Auth::user()->volunteer->analises->count();
 
         $analiseAprovada = DB::table('analyses')
             ->join('petitions', 'petitions.id', '=', 'analyses.petition_id')

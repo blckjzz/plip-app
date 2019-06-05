@@ -5,7 +5,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{$analises->count()}}</h3>
+                    <h3>{{(isset($analises))? $analises : 0}}</h3>
                     <p>PL Adotados</p>
                 </div>
                 <div class="icon">
@@ -19,8 +19,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{$analiseAprovada}}</h3>
-
+                    <h3>{{(isset($analiseAprovada))? $analiseAprovada : 0}}</h3>
                     <p>Projetos Aprovados</p>
                 </div>
                 <div class="icon">
@@ -33,8 +32,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{$reprovadas}}</h3>
-
+                    <h3>{{(isset($reprovadas))? $reprovadas : 0}}</h3>
                     <p>Projetos Reprovados</p>
                 </div>
                 <div class="icon">
