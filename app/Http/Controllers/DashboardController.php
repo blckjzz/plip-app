@@ -11,14 +11,6 @@ class DashboardController extends Controller
 {
     public function getCardValues()
     {
-        if(!Auth::user()->volunteer->analises == null){
-            $analises = Auth::user()->volunteer->analises;
-        }else{
-            $analises = 0;
-        }
-
-
-
         $analiseAprovada = DB::table('analyses')
             ->join('petitions', 'petitions.id', '=', 'analyses.petition_id')
             ->join('volunteers', 'volunteers.id', '=', 'analyses.volunteer_id')
@@ -35,6 +27,6 @@ class DashboardController extends Controller
             ->get()->count();
 
 
-        return view('layouts.home', compact('analises', 'reprovadas','analiseAprovada'));
+        return view('layouts.home', compact( 'reprovadas','analiseAprovada'));
     }
 }

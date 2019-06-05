@@ -5,7 +5,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{( count($analises) > 0)? $analises->count() : 0}}</h3>
+                    <h3>{{ count(Auth::user()->volunteer->analises) > 0 ? Auth::user()->volunteer->analises->count(): "0" }}</h3>
                     <p>PL Adotados</p>
                 </div>
                 <div class="icon">
