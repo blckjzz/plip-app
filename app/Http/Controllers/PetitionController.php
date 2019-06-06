@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Analysis;
 use App\Log;
+use App\Notifications\NewAssignment;
 use App\Volunteer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -167,29 +168,31 @@ class PetitionController extends Controller
     public
     function saveAssign(Request $request)
     {
-        try {
-
+       $volunteer =  DB::transaction(function () use ($request) {
             $analysis = new Analysis();
             // find petition
-            $petition = Petition::findOrFail($request->input('project_id'));
+            $petition = Petition::find($request->input('project_id'));
             // always with status two = analise
             $petition->status_id = 2;
             //find volunteer
-            $volunteer = Volunteer::findOrFail($request->input('volunteer_id'));
+            $volunteer = Volunteer::find($request->input('volunteer_id'));
 
-            if ($petition->save()) {
-                $analysis->volunteer_id = $volunteer->id;
-                $analysis->petition_id = $petition->id;
-                $analysis->save();
-            }
+
+            $petition->save();
+            $analysis->volunteer_id = $volunteer->id;
+            $analysis->petition_id = $petition->id;
+            $analysis->save();
+
             // save send a mail to volunteer with new task added
 
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-        return redirect()->action('PetitionController@showPetitionsInAnalysis');
-    }
+            $volunteer->user->notify(new NewAssignment($volunteer, $analysis));
 
+            return $volunteer;
+
+        });
+
+        return redirect()->action('PetitionController@assign')->with('success', 'Tarefa adicionada! ' . $volunteer->user->name . ' receberá um e-mail de notificação em breve!');
+    }
 
 
     /**
