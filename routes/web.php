@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect()->route('login');
 });
 Auth::routes();
@@ -25,7 +25,7 @@ route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('petition/details/{id}', 'PetitionController@showPetition');
     Route::get('petition/edit/{id}', 'PetitionController@edit');
     Route::get('/petition/assign', 'PetitionController@assign');
-    Route::post('/petition/assign', 'PetitionController@saveAssign');
+    Route::post('/petition/salvar-assignment', 'PetitionController@saveAssign');
     Route::post('/petition/save', 'PetitionController@save');
     Route::get('/petition/in-analysis', 'PetitionController@showPetitionsInAnalysis');
     Route::get('/petition/new-petitions', 'PetitionController@showNewPetitions');
@@ -48,4 +48,6 @@ route::middleware(['auth', 'isVolunteer'])->prefix('voluntario')->group(function
     Route::GET('/analise/{id}', 'VolunteerController@getAnaliseView');
     Route::POST('/salvar-analise', 'VolunteerController@cadastraAnalise');
 });
+Route::get('/new-notification/{id}', 'VolunteerController@newNotification');
+
 
