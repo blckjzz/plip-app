@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Analysis;
 use App\Http\Requests\AnalysisCreateRequest;
 use App\Http\Requests\VolunteerCreationRequest;
+use App\Notifications\NewAssignment;
 use App\Petition;
 use App\User;
 use App\Volunteer;
@@ -202,10 +203,20 @@ class VolunteerController extends Controller
             $analise->save();
 
             // SALVAR STATUS NOVO DA PETIÇÃO
-            return redirect()->action('VolunteerController@getAnaliseView',$analise->id)->with('success','Sua análise foi registrada com sucesso!');
+            return redirect()->action('VolunteerController@getAnaliseView', $analise->id)->with('success', 'Sua análise foi registrada com sucesso!');
 
         } catch (Exception $e) {
             return $e->getTrace();
         }
+    }
+
+
+    public function newNotification($id)
+    {
+        $u = User::find($id);
+        $analise = Analysis::find(4);
+        $u->notify(new NewAssignment($u, $analise));
+        return $u;
+
     }
 }
