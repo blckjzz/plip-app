@@ -48,6 +48,5 @@ route::middleware(['auth', 'isVolunteer'])->prefix('voluntario')->group(function
     Route::GET('/analise/{id}', 'VolunteerController@getAnaliseView');
     Route::POST('/salvar-analise', 'VolunteerController@cadastraAnalise');
 });
-Route::get('/new-notification/{id}', 'VolunteerController@newNotification');
 
 
