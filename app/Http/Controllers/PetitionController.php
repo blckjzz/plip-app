@@ -185,7 +185,7 @@ class PetitionController extends Controller
 
             // save send a mail to volunteer with new task added
 
-            $volunteer->user->notify(new NewAssignment($volunteer, $analysis));
+            $this->newAssignmentNotification($volunteer, $analysis);
 
             return $volunteer;
 
@@ -194,6 +194,11 @@ class PetitionController extends Controller
         return redirect()->action('PetitionController@assign')->with('success', 'Tarefa adicionada! ' . $volunteer->user->name . ' receberá um e-mail de notificação em breve!');
     }
 
+
+    public function newAssignmentNotification(Volunteer $volunteer, Analysis $analise)
+    {
+        $volunteer->user->notify(new NewAssignment($volunteer, $analise));
+    }
 
     /**
      * @param $answer
