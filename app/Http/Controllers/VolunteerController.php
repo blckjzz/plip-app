@@ -209,14 +209,4 @@ class VolunteerController extends Controller
             return $e->getTrace();
         }
     }
-
-
-    public function newNotification($id)
-    {
-        $u = User::find($id);
-        $analise = Analysis::find(4);
-        $u->notify(new NewAssignment($u, $analise));
-        return $u;
-
-    }
 }
