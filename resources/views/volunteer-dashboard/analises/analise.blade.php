@@ -31,33 +31,33 @@
                             <div class="form-group">
                                 <label for="">Texto de análise: </label> <span style="color: red">*</span>
                                 <textarea name="analisys_text" class="form-control"
-                                          rows="12">{{$analise->analisys_text}}</textarea>
+                                          rows="12">{{(old('analisys_text'))? old('analisys_text'): $analise->analisys_text}}</textarea>
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">Leis usadas na análise</label> <span style="color: red">*</span>
-                                <textarea name="referral_law" class="form-control">{{$analise->law_link}}</textarea>
+                                <textarea name="referral_law" class="form-control">{{(old('referral_law'))? old('referral_law'): $analise->law_link}}</textarea>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">Eleitorado: </label> <span style="color: red">*</span>
-                                <input id='votes' value="{{$analise->vote_number}}" name="vote_number" min="0" type="number"
+                                <input id='votes' value="{{(old('vote_number'))? old('vote_number'): $analise->vote_number}}" name="vote_number" min="0" type="number"
                                        class="form-control"/>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Porcentagem do eleitorado necessário: </label><span
                                         style="color: red">*</span>
-                                <input id="percent" name="percent_votes" type="number" max="100" step="0.1" value="{{$analise->percent_votes}}" class="form-control"/>
+                                <input id="percent" name="percent_votes" type="number" max="100" step="0.1" value="{{(old('percent_votes'))? old('percent_votes'): $analise->percent_votes}}" class="form-control"/>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Mínimo do eleitorado necessário:</label> <span
                                         style="color: red">*</span>
-                                <input id="minimum" name="minimum_signatures" type="text" class="form-control" readonly="readonly"  value="{{$analise->minimum_signatures}}">
+                                <input id="minimum" name="minimum_signatures" type="text" class="form-control" readonly="readonly"  value="{{(old('minimum_signatures'))? old('minimum_signatures'): $analise->minimum_signatures}}">
                             </div>
 
 
