@@ -37,7 +37,7 @@
 
 {{-- Outro Lines --}}
 @foreach ($outroLines as $line)
-{{ $line }}
+{!! $line !!}
 
 @endforeach
 
@@ -52,8 +52,7 @@
 @isset($actionText)
 @component('mail::subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: ',
+    "Se tiver problemas em clicar no botão, copie e cole a URL seguinte no seu navegador: \":actionText\" \n",
     [
         'actionText' => $actionText
     ]
