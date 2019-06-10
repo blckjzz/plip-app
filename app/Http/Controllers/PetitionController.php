@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Petition;
 use App\Status;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\NewAssigmentRequest;
 use Mockery\Exception;
 use function PHPSTORM_META\type;
 
@@ -158,17 +159,15 @@ class PetitionController extends Controller
 
         // list volunteers
         $volunteers = Volunteer::all();
-        // list status
-        $status = Status::all();
         // create another function where save the data and stores into the database
-        return view('petition.create-assignment', ['petitions' => $petitions, 'volunteers' => $volunteers, 'status' => $status]);
+        return view('petition.create-assignment', ['petitions' => $petitions, 'volunteers' => $volunteers]);
 
     }
 
     public
-    function saveAssign(Request $request)
+    function saveAssign(NewAssigmentRequest $request)
     {
-       $volunteer =  DB::transaction(function () use ($request) {
+        $volunteer =  DB::transaction(function () use ($request) {
             $analysis = new Analysis();
             // find petition
             $petition = Petition::find($request->input('project_id'));
