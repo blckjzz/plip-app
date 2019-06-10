@@ -5,7 +5,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form>
+            <form class="adotar">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="btn-group">
@@ -118,4 +118,8 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    @include('volunteer-dashboard.partials.confirmation-adoption')
 @endsection
