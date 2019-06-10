@@ -178,7 +178,7 @@ class VolunteerController extends Controller
     {
 
         $analises = Auth::user()->volunteer->analises;
-        $title = "Meus PL's adotados";
+        $title = "Meus Projetos";
         return view('volunteer-dashboard.assignments', compact('analises', 'title'));
     }
 
