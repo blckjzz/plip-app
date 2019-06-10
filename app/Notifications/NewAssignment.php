@@ -46,13 +46,13 @@ class NewAssignment extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Nova tarefa - Projeto: ' . Str::limit($this->assignment->petition->name, 20))
-            ->greeting('Olá, ' . $this->volunteer->user->name)
-            ->line('A Equipe Mudamos+ acaba de cadastrar uma nova tarefa para você <3')
-            ->line("Dá uma olhadinha clicando no botão abaixo para saber mais sobre o projeto")
-            ->line($this->assignment->petition->name)
+            ->subject('Nova tarefa - Projeto: ' . Str::limit($this->assignment->petition->name, 25))
+            ->greeting('Olá, ' . $this->volunteer->user->name.',')
+            ->line('A Equipe Mudamos acaba de cadastrar uma nova tarefa para você :)')
+            ->line('Dá uma olhadinha clicando no botão abaixo para saber mais sobre o projeto cadastrado: '. $this->assignment->petition->name)
             ->action('Veja detalhes do Projeto', action('VolunteerController@viewPetitionDetails', $this->assignment->petition->id))
-            ->salutation('Se tiver dúvida é só chamar!');
+            ->salutation('Se tiver qualquer dúvida, escreva para nós no voluntarios@mudamos.org')
+            ->salutation('Obrigada pela sua colaboração <3');
     }
 
     /**
