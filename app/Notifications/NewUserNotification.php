@@ -28,7 +28,7 @@ class NewUserNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -39,26 +39,27 @@ class NewUserNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
             ->subject('Credenciais Mudamos+')
-            ->greeting('Olá, ' . $this->volunteer->user->name.'!')
+            ->greeting('Olá, ' . $this->volunteer->user->name . '!')
             ->line('Seja bem-vindo ao Sistema de Voluntários do Mudamos+.')
             ->line('Seguem suas credenciais de acesso ao Sistema de Análise de Projetos.')
-            ->line("Login de acesso: ". $this->volunteer->user->email)
-            ->line('Senha: '. $this->password)
+            ->line("Login de acesso: " . $this->volunteer->user->email)
+            ->line('Senha: ' . $this->password)
             ->action('Entrar no sistema', route('login'))
-            ->salutation('Qualquer problema com acesso entrar em contato com diego@itsrio.org');
+            ->salutation('Se tiver qualquer dúvida, escreva para nós no voluntarios@mudamos.org')
+            ->salutation('Obrigada pela sua colaboração <3');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)
