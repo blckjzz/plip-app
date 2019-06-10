@@ -6,7 +6,7 @@
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ count(Auth::user()->volunteer->analises) > 0 ? Auth::user()->volunteer->analises->count(): "0" }}</h3>
-                    <p>PL Adotados</p>
+                    <p>Meus PL's</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-file"></i>
@@ -39,6 +39,20 @@
                     <i class="fa fa-angle-double-down"></i>
                 </div>
 {{--                <a href="#" class="small-box-footer"><i></i></a>--}}
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-light">
+                <div class="inner">
+                    <h3>{{(isset($reprovadas))? $reprovadas : 0}}</h3>
+                    <p>Projetos Publicados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                {{--                <a href="#" class="small-box-footer"><i></i></a>--}}
             </div>
         </div>
     </div>
