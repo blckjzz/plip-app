@@ -6,6 +6,7 @@ use App\Analysis;
 use App\Http\Requests\AnalysisCreateRequest;
 use App\Http\Requests\VolunteerCreationRequest;
 use App\Notifications\NewAssignment;
+use App\Notifications\NewUserNotification;
 use App\Petition;
 use App\User;
 use App\Volunteer;
@@ -54,15 +55,19 @@ class VolunteerController extends Controller
     {
         DB::transaction(function () use ($request) {
             $user = new User();
+
             $user->name = $request->name;
             $user->email = $request->email;
             $user->role_id = 2; // (1) - Admin ==== (2) -  volunteer
-            $user->password = bcrypt($request->password);
+            $password = ($request->password == null)? str_random(8) : $request->password;
+            $user->password = bcrypt($password);
             $user->is_active = 1;
             $user->save();
             $voluntario = new Volunteer($request->all());
             $voluntario->user_id = $user->id;
             $voluntario->save();
+
+            $user->notify(new NewUserNotification($voluntario, $password));
         });
         return redirect()->action('VolunteerController@index')->with(['message' => 'Voluntário criado com sucesso!']);
     }
