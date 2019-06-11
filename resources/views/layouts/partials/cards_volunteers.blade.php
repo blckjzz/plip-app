@@ -5,7 +5,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ count(Auth::user()->volunteer->analises) > 0 ? Auth::user()->volunteer->analises->count(): "0" }}</h3>
+                    <h3>{{ (isset($meusPLs))? $meusPLs : "0" }}</h3>
                     <p>Meus PL's</p>
                 </div>
                 <div class="icon">
@@ -46,7 +46,7 @@
             <!-- small box -->
             <div class="small-box bg-light">
                 <div class="inner">
-                    <h3>{{(isset($reprovadas))? $reprovadas : 0}}</h3>
+                    <h3>{{(isset($publicados))? $publicados : 0}}</h3>
                     <p>Projetos Publicados</p>
                 </div>
                 <div class="icon">
