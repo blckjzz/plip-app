@@ -5,7 +5,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $reports['petitionCount'] }}</h3>
+                    <h3>{{ $petitionCount }}</h3>
 
                     <p>Projetos</p>
                 </div>
@@ -20,7 +20,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{ $reports['petitionInAnalisys'] }}</h3>
+                    <h3>{{ $petitionInAnalisys }}</h3>
 
                     <p>Projetos em análise</p>
                 </div>
@@ -35,9 +35,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{$reports['new_projects']}}</h3>
+                    <h3>{{$new_projects}}</h3>
 
-                    <p>Projetos recebidos hoje</p>
+                    <p>PL's recebidos nos últimos 7 dias</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
