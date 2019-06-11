@@ -20,6 +20,7 @@ Route::get('admin', function () {
 })->middleware(['isAdmin', 'auth']);
 
 route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
+    Route::get('/', 'DashboardController@getAdminCardValues');
     Route::get('/petition', 'PetitionController@index');
     Route::get('/typeform/getAnwsers', 'TypeformController@getTypeformAnswers');
     Route::get('petition/details/{id}', 'PetitionController@showPetition');
@@ -34,6 +35,7 @@ route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::POST('/voluntarios/salvar', 'VolunteerController@store');
     Route::GET('/voluntarios/ver/{id}', 'VolunteerController@show');
     Route::GET('/voluntarios/editar/{id}', 'VolunteerController@edit');
+
 });
 
 
