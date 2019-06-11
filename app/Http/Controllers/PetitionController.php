@@ -12,8 +12,6 @@ use App\Petition;
 use App\Status;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\NewAssigmentRequest;
-use Mockery\Exception;
-use function PHPSTORM_META\type;
 
 
 class PetitionController extends Controller
@@ -139,7 +137,7 @@ class PetitionController extends Controller
     public
     function showNewPetitions()
     {
-        $petitions = Petition::all()->where('created_at', '>=', Carbon::today());
+        $petitions = Petition::all()->where('submitDate', '>=', Carbon::today()->subDays(7));
         return view('petition.petition', ['petitions' => $petitions]);
     }
 
@@ -167,7 +165,7 @@ class PetitionController extends Controller
     public
     function saveAssign(NewAssigmentRequest $request)
     {
-        $volunteer =  DB::transaction(function () use ($request) {
+        $volunteer = DB::transaction(function () use ($request) {
             $analysis = new Analysis();
             // find petition
             $petition = Petition::find($request->input('project_id'));
