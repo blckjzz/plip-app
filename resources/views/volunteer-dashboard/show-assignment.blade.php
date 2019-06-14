@@ -24,7 +24,7 @@
                         @if(!isset($petition->analise))
                             <div class="btn-group">
                                 <a href="{{ action('VolunteerController@saveSelfAssign', $petition->id)}}">
-                                    <button type="button" class="btn btn-success">Adotar PL</button>
+                                    <button type="button"  id="adotar" class="btn btn-success">Adotar PL</button>
                                 </a>
                             </div>
                         @endif
@@ -121,5 +121,20 @@
 @endsection
 
 @section('scripts')
-    @include('volunteer-dashboard.partials.confirmation-adoption')
+    <script>
+        jQuery(document).ready(function ($) {
+            $('#adotar').on('click', function (e) {
+                if (!confirm('Você realmente deseja adotar esse PL?')) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="csrf-token"]').val()
+                        }
+
+                    });
+
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 @endsection
