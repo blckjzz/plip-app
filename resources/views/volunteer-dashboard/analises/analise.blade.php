@@ -164,7 +164,7 @@
             voters = parseInt($('#votes').val());
             amount = voters * (percentil/100);
             $('#minimum').attr('value', amount);
-            console.log(amount)
+            // console.log(amount)
         });
     </script>
 @endsection
