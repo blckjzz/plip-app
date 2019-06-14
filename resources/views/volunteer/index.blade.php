@@ -7,7 +7,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nome do Voluntário</th>
+            <th scope="col">Nome</th>
             <th scope="col">Telefone</th>
             <th scope="col">Email</th>
             <th scope="col">Mudamos Mail</th>
@@ -19,7 +19,7 @@
         @foreach ($voluntarios as $voluntario)
             <tr>
                 <th>{{ $voluntario->id }}</th>
-                <td>{{ str_limit($voluntario->user->name, 30) }} </td>
+                <td>{{ str_limit($voluntario->user->name .' '. $voluntario->user->sobrenome, 30) }} </td>
                 <td>{{ str_limit($voluntario->telephone, 30) }} </td>
                 <td>{{ str_limit($voluntario->personal_email, 30) }} </td>
                 <td>{{ str_limit($voluntario->user->email, 30) }} </td>

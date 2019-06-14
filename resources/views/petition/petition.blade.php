@@ -29,7 +29,7 @@
                 <td>
                     @if(isset($petition->analise->analista->user->name))
                     <a href="{{ action('VolunteerController@show', $petition->analise->analista->id) }}">
-                        {{ $petition->analise->analista->user->name}}
+                        {{ $petition->analise->analista->user->name . $petition->analise->analista->user->sobrenome}}
                     </a>
                     @endif
                 </td>
