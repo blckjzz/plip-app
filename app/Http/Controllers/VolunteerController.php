@@ -57,6 +57,7 @@ class VolunteerController extends Controller
             $user = new User();
 
             $user->name = $request->name;
+            $user->sobrenome = $request->sobrenome;
             $user->email = $request->email;
             $user->role_id = 2; // (1) - Admin ==== (2) -  volunteer
             $password = ($request->password == null)? str_random(8) : $request->password;

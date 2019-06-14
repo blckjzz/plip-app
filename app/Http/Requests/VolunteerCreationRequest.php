@@ -26,9 +26,12 @@ class VolunteerCreationRequest extends FormRequest
         return [
             'email' => 'required|unique:users',
             'password' => 'nullable',
+            'name' => 'required|string',
+            'sobrenome' => 'required|string',
             'personal_email' => 'nullable|unique:volunteers',
             'telephone' => 'nullable|min:9',
-            'volunteer_since' => 'required'
+            'volunteer_since' => 'required',
+
         ];
     }
 }
