@@ -12,7 +12,8 @@
                 <div class="icon">
                     <i class="fa fa-file"></i>
                 </div>
-                <a href="{{ action('PetitionController@index') }}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ action('PetitionController@index') }}" class="small-box-footer">Ver <i
+                            class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -27,7 +28,8 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="{{ action('PetitionController@showPetitionsInAnalysis')}}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ action('PetitionController@showPetitionsInAnalysis')}}" class="small-box-footer">Ver <i
+                            class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -42,10 +44,25 @@
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="{{action('PetitionController@showNewPetitions')}}" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{action('PetitionController@showNewPetitions')}}" class="small-box-footer">Ver <i
+                            class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
 
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{(isset($petitionsAprovados))? $petitionsAprovados : 0}}</h3>
+                    <p>Projetos Aprovados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                <a href="{{ action('PetitionController@showApprovedPetitions')}}" class="small-box-footer">Ver <i
+                            class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
     </div>
     <!-- /.row -->

@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
-@section('title', 'Petitions')
-@section('pageTitle', 'Petições')
+@section('title', $title, 'Petições')
+@section('pageTitle', $title, 'Petições')
 @section('content')
     <table class="" id="petitions">
         <thead>

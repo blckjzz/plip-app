@@ -149,6 +149,13 @@ class PetitionController extends Controller
     }
 
     public
+    function showApprovedPetitions()
+    {
+        $petitions = Petition::all()->where('status_id', '=', 5);
+        return view('petition.petition', ['petitions' => $petitions, 'title' => 'Petições Aprovadas']);
+    }
+
+    public
     function assign()
     {
         // list petitions

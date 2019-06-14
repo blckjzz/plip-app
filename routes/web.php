@@ -30,6 +30,7 @@ route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/petition/save', 'PetitionController@save');
     Route::get('/petition/in-analysis', 'PetitionController@showPetitionsInAnalysis');
     Route::get('/petition/new-petitions', 'PetitionController@showNewPetitions');
+    Route::get('/petition/approved', 'PetitionController@showApprovedPetitions');
     Route::GET('/voluntarios/criar', 'VolunteerController@create');
     Route::GET('/voluntarios/lista', 'VolunteerController@index');
     Route::POST('/voluntarios/salvar', 'VolunteerController@store');

@@ -50,6 +50,7 @@ class DashboardController extends Controller
         $petitionCount = Petition::all()->count();
         $petitionInAnalisys = Petition::all()->where('status_id', '=', '2')->count();
         $new_projects = Petition::all()->where('submitDate', '>=', Carbon::today()->subDays(7))->count();
-        return view('layouts.home', compact('petitionCount', 'petitionInAnalisys', 'new_projects'));
+        $petitionsAprovados = Petition::all()->where('status_id', '=', '5')->count();
+        return view('layouts.home', compact('petitionCount', 'petitionInAnalisys', 'new_projects','petitionsAprovados'));
     }
 }
