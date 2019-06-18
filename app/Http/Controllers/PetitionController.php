@@ -138,14 +138,14 @@ class PetitionController extends Controller
     function showNewPetitions()
     {
         $petitions = Petition::all()->where('submitDate', '>=', Carbon::today()->subDays(7));
-        return view('petition.petition', ['petitions' => $petitions]);
+        return view('petition.petition', ['petitions' => $petitions, 'title' => 'Novas Petições']);
     }
 
     public
     function showPetitionsInAnalysis()
     {
         $petitions = Petition::all()->where('status_id', '=', 2);
-        return view('petition.petition', ['petitions' => $petitions]);
+        return view('petition.petition', ['petitions' => $petitions, 'title' => 'Petições em Análise']);
     }
 
     public
