@@ -28,7 +28,7 @@ class PetitionController extends Controller
     public function index()
     {
         $petitions = Petition::all();
-        return view('petition.petition', ['petitions' => $petitions]);
+        return view('petition.petition', ['petitions' => $petitions, 'title' => 'Lista de Petições']);
     }
 
     public function syncPlips()
