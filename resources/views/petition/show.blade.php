@@ -8,7 +8,7 @@
             <div class="col-sm-6">
                 <input type="hidden" value="{{csrf_token()}}" name="_token" id="csrf-token"/>
                 <input type="hidden" name="petition_id" value="{{$petition->id}}">
-                <input type="hidden" name="analysis_id" value="{{isset($petition->analise->id)}}">
+                <input type="hidden" name="analysis_id" value="{{$petition->analise->id}}">
 
                 <div class="card">
                     <div class="card-body">
@@ -33,6 +33,7 @@
                                     </a>
                                 @endif
                             </div>
+
                         </div>
                         <fieldset disabled="disabled">
                             <h5 class="card-title">Análise do Projeto</h5>
@@ -41,12 +42,21 @@
                                 <div class="form-group">
                                     <label for="">Texto de análise: </label> <span style="color: red">*</span>
                                     <textarea name="analisys_text" class="form-control"
-                                              rows="12">{{isset($petition->analise->analisys_text)}}</textarea>
+                                              rows="12">{{$petition->analise->analisys_text}}</textarea>
                                 </div>
                             </div>
 
+
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="proponente">Status do Projeto </label>
+                                    <input name="petition_status" type="text" class="form-control" disabled
+                                           value="{{$petition->status->status}}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+
                                     <label for="">Leis usadas na análise</label> <span style="color: red">*</span>
                                     <textarea name="referral_law"
                                               class="form-control">{{isset($petition->analise->law_link)}}</textarea>
@@ -64,7 +74,7 @@
                                     <label for="">Porcentagem do eleitorado necessário: </label><span
                                             style="color: red">*</span>
                                     <input id="percent" name="percent_votes" type="number" max="100" step="0.1"
-                                           value="{{isset($petition->analise->percent_votes)}}"
+                                           value="{{$petition->analise->percent_votes}}"
                                            class="form-control"/>
                                 </div>
 
@@ -73,28 +83,26 @@
                                             style="color: red">*</span>
                                     <input id="minimum" name="minimum_signatures" type="text" class="form-control"
                                            readonly="readonly"
-                                           value="{{isset($petition->analise->minimum_signatures)}}">
+                                           value="{{$petition->analise->minimum_signatures}}">
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label for="">Status do projeto:</label>
-                                    <select name="status" class="form-control">
-                                        <option disabled selected>Selecione um status</option>
-                                        <option value="3">
-                                            Reprovado
-                                        </option>
-                                        <option value="4">
-                                            Reprovado - Inconstitucional
-                                        </option>
-                                        <option value="5">
-                                            Aprovado
-                                        </option>
-                                    </select>
-                                </div>
-                                <label for="proponente">Status do Projeto </label>
-                                <input name="petition_status" type="text" class="form-control" disabled
-                                       value="{{isset($petition->analise->status->status)}}">
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="">Status do projeto:</label>--}}
+                                    {{--<select name="status" class="form-control">--}}
+                                        {{--<option selected="selected">Selecione um status</option>--}}
+                                        {{--<option value="3">--}}
+                                            {{--Reprovado--}}
+                                        {{--</option>--}}
+                                        {{--<option value="4">--}}
+                                            {{--Reprovado - Inconstitucional--}}
+                                        {{--</option>--}}
+                                        {{--<option value="5">--}}
+                                            {{--Aprovado--}}
+                                        {{--</option>--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+
                             </div>
                     </div>
                 </div>
