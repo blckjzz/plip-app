@@ -59,13 +59,13 @@
 
                                     <label for="">Leis usadas na análise</label> <span style="color: red">*</span>
                                     <textarea name="referral_law"
-                                              class="form-control">{{isset($petition->analise->law_link)}}</textarea>
+                                              class="form-control">{{$petition->analise->law_link}}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Eleitorado: </label> <span style="color: red">*</span>
-                                    <input id='votes' value="{{isset($petition->analise->vote_number)}}"
+                                    <input id='votes' value="{{$petition->analise->vote_number}}"
                                            name="vote_number" min="0" type="number"
                                            class="form-control"/>
                                 </div>
